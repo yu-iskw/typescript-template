@@ -6,17 +6,31 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
-  "main": "index.js",
   "scripts": {
     "build": "pnpm --recursive build",
-    "format": "trunk fmt",
-    "format:all": "trunk fmt --all",
-    "lint": "trunk check",
-    "lint:all": "trunk check --all",
+    "format": "pnpm format:eslint && pnpm format:trunk",
+    "format:eslint": "eslint . --fix",
+    "format:trunk": "trunk fmt --all",
+    "lint": "pnpm lint:eslint && pnpm lint:trunk",
+    "lint:eslint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "lint:security": "trunk check --all --scope security",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:trunk": "trunk check --all",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update": "pnpm up --latest -r"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "@eslint/js": "^9.8.0",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-n": "^17.10.1",
+    "eslint-plugin-promise": "^7.0.0",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-sonarjs": "^1.0.3",
+    "eslint-plugin-unused-imports": "^4.0.0",
+    "globals": "^15.8.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^7.18.0"
   }
 }
