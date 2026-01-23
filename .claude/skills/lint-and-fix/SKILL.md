@@ -12,7 +12,7 @@ An autonomous loop for the agent to identify, fix, and verify linting and format
 ## Loop Logic
 
 1. **Identify**: Run `pnpm lint` (which executes `trunk check`) to list current violations.
-2. **Analyze**: Examine the output from Trunk, focusing on the file path, line number, and error message.
+2. **Analyze**: Examine the output from Trunk, focusing on the file path, line number, and error message. Refer to [../common-references/troubleshooting.md](../common-references/troubleshooting.md) for environment or runtime issues.
 3. **Fix**:
    - For formatting issues, run `pnpm format` (which executes `trunk fmt`).
    - For linting violations, apply the minimum necessary change to the source code to resolve the error.
@@ -33,8 +33,7 @@ An autonomous loop for the agent to identify, fix, and verify linting and format
 2. Agent runs `pnpm format`.
 3. `pnpm lint` now passes.
 
-### Scenario: Fixing a linting error
+## Resources
 
-1. `pnpm lint` reports an unused variable in `packages/common/src/index.ts`.
-2. Agent removes the unused variable.
-3. `pnpm lint` passes.
+- [Trunk CLI Reference](../common-references/trunk-commands.md): Common commands for linting and formatting.
+- [Trunk Documentation](https://docs.trunk.io/): Official documentation for the Trunk CLI.

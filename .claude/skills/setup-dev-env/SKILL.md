@@ -34,11 +34,11 @@ If `trunk` is not found, advise the user to install it. On macOS, use:
 brew install trunk-io
 ```
 
-For other platforms, refer to the [Trunk installation documentation](https://docs.trunk.io/cli/getting-started/install).
+For other platforms, refer to the [Trunk installation documentation](https://docs.trunk.io/references/cli/getting-started/install).
 
 ### 2. Dependency Installation
 
-Run the following command at the workspace root to install all project dependencies:
+Run the following command at the workspace root to install all project dependencies. Refer to [../common-references/pnpm-commands.md](../common-references/pnpm-commands.md) for more pnpm commands.
 
 ```bash
 pnpm install
@@ -46,7 +46,7 @@ pnpm install
 
 ### 3. Tooling Setup
 
-Trunk manages linters and formatters hermetically. Run the following command to ensure all required tools are downloaded and ready:
+Trunk manages linters and formatters hermetically. Run the following command to ensure all required tools are downloaded and ready. Refer to [../common-references/trunk-commands.md](../common-references/trunk-commands.md) for more Trunk commands.
 
 ```bash
 trunk install
@@ -57,3 +57,10 @@ trunk install
 - All `pnpm` dependencies are installed successfully.
 - `trunk` is installed and all managed tools are initialized.
 - The Node.js version matches the requirement in `.node-version`.
+
+## Post-Setup Verification
+
+To ensure the environment is fully operational:
+
+1. **Invoke Verifier**: Run the `verifier` subagent ([../../agents/verifier.md](../../agents/verifier.md)). This confirms that the freshly installed dependencies allow for a successful build, pass lint checks, and satisfy all unit tests.
+2. **Handle Failure**: If the `verifier` fails, follow its reporting to resolve environment-specific issues.

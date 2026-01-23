@@ -15,7 +15,7 @@ An autonomous loop for the agent to identify, analyze, and fix failing unit test
 2. **Analyze**: Examine the test output to determine:
    - The failing test file and line number.
    - The expected vs actual values.
-   - The underlying cause in the source code.
+   - Refer to [../common-references/troubleshooting.md](../common-references/troubleshooting.md) for common test failure patterns.
 3. **Fix**: Apply the minimum necessary change to either the source code (if it's a bug) or the test code (if the test is outdated).
 4. **Verify**: Re-run `pnpm test`.
    - If passed: Move to the next failing test or finish if all are resolved.
@@ -40,5 +40,9 @@ An autonomous loop for the agent to identify, analyze, and fix failing unit test
 
 1. `pnpm test` fails because a UI component's text changed from "Submit" to "Confirm".
 2. Agent confirms the change was intentional.
-3. Agent updates the test expectation to expect "Confirm".
-4. `pnpm test` passes.
+3. `pnpm test` passes.
+
+## Resources
+
+- [pnpm Commands for Node.js](../common-references/pnpm-commands.md): Common commands for testing and managing dependencies.
+- [Testing Best Practices](../../../.cursor/rules/tech-stack.mdc): Project-specific testing guidelines.

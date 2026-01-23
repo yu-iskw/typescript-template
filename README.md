@@ -20,7 +20,7 @@ On macOS, you can install Trunk using Homebrew:
 brew install trunk-io
 ```
 
-For other platforms, see the [Trunk installation guide](https://docs.trunk.io/cli/getting-started/install).
+For other platforms, see the [Trunk installation guide](https://docs.trunk.io/references/cli/getting-started/install).
 
 #### Install Dependencies
 

@@ -15,7 +15,7 @@ An autonomous loop for the agent to identify, analyze, and fix build errors usin
 2. **Analyze**: Examine the build output to determine:
    - The failing package and file.
    - The specific compiler or build error message.
-   - The underlying cause in the source code or configuration.
+   - Refer to [../common-references/troubleshooting.md](../common-references/troubleshooting.md) for common TS errors.
 3. **Fix**: Apply the minimum necessary change to resolve the error (e.g., fixing TypeScript types, correcting imports, or updating configurations).
 4. **Verify**: Re-run `pnpm build`.
    - If passed: Finish.
@@ -33,5 +33,8 @@ An autonomous loop for the agent to identify, analyze, and fix build errors usin
 
 1. `pnpm build` fails because of a type mismatch in `packages/common/src/index.ts`.
 2. Agent analyzes the error and finds an incorrect interface implementation.
-3. Agent fixes the interface or the implementation.
-4. `pnpm build` passes.
+
+## Resources
+
+- [pnpm Commands for Node.js](../common-references/pnpm-commands.md): Common commands for building and managing dependencies.
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/): Official documentation for TypeScript.

@@ -10,6 +10,7 @@ This reference provides the commands used for pnpm to ensure a consistent upgrad
 | **Test**    | `pnpm test`    |
 | **Install** | `pnpm install` |
 | **Lint**    | `pnpm lint`    |
+| **Build**   | `pnpm build`   |
 
 ## Upgrade Commands
 
@@ -32,3 +33,4 @@ For pnpm (the primary manager for this template):
 - **Targeted (Root)**: `pnpm update <package> -w`
 - **Targeted (Package)**: `pnpm --filter <package-name> update <package>`
 - **All (Recursive)**: `pnpm -r update`
+- **Recursive Build**: `pnpm -r build`
