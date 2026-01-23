@@ -8,11 +8,25 @@
 
 - [pnpm](https://pnpm.io/)
 - Node.js (see `.node-version`)
+- [Trunk](https://trunk.io/) (for linting and formatting)
 
 ### Installation
 
+#### Install Trunk
+
+On macOS, you can install Trunk using Homebrew:
+
+```bash
+brew install trunk-io
+```
+
+For other platforms, see the [Trunk installation guide](https://docs.trunk.io/cli/getting-started/install).
+
+#### Install Dependencies
+
 ```bash
 pnpm install
+trunk install
 ```
 
 ### Development
