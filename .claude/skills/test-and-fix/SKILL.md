@@ -1,9 +1,9 @@
 ---
-name: run-tests-and-fix
+name: test-and-fix
 description: Run unit tests and automatically fix code failures. Use when tests are failing or when implementing new features to ensure regression-free code.
 ---
 
-# Run Tests and Fix Loop
+# Test and Fix Loop
 
 ## Purpose
 
