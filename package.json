@@ -4,7 +4,7 @@
   "private": true,
   "description": "",
   "keywords": [],
-  "license": "ISC",
+  "license": "Apache-2.0",
   "author": "",
   "main": "index.js",
   "scripts": {
@@ -14,9 +14,15 @@
     "lint": "trunk check",
     "lint:all": "trunk check --all",
     "lint:security": "trunk check --all --scope security",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "packageManager": "pnpm@10.28.1",
+  "engines": {
+    "node": ">=24.13.0",
+    "pnpm": ">=10.28.1"
   }
 }
