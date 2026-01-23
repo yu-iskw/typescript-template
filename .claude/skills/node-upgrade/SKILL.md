@@ -1,6 +1,6 @@
 ---
 name: node-upgrade
-description: Safely upgrade Node.js dependencies in pnpm workspaces. Use when asked to "upgrade dependencies", "update packages", or "check for updates".
+description: Safely upgrade Node.js dependencies in pnpm workspaces. Use when asked to "upgrade dependencies", "update packages", "check for updates", or fix version mismatches.
 ---
 
 # Safe Node.js Dependency Upgrade

@@ -1,6 +1,6 @@
 ---
 name: test-and-fix
-description: Run unit tests and automatically fix code failures. Use when tests are failing or when implementing new features to ensure regression-free code.
+description: Run unit tests and automatically fix code failures, regression bugs, or test mismatches. Use when tests are failing, after implementing new features, or to repair "broken" tests.
 ---
 
 # Test and Fix Loop

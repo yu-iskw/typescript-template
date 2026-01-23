@@ -1,6 +1,6 @@
 ---
 name: initialize-project
-description: Initialize a new project from the TypeScript template by renaming packages, updating metadata, and cleaning up documentation. Use when starting a new project or "bootstrapping" from this template.
+description: Initialize a new project from the TypeScript template by renaming packages, updating metadata, and cleaning up documentation. Use when starting a new project, "bootstrapping" from this template, or setting up a fresh repository.
 ---
 
 # Initialize Project

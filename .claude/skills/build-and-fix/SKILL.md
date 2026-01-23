@@ -1,6 +1,6 @@
 ---
 name: build-and-fix
-description: Build the project and automatically fix any build errors. Use when the project fails to build or after making significant changes.
+description: Build the project and automatically fix any build errors, compilation failures, or type mismatches. Use when the project fails to build, shows "broken" states, or after making significant changes.
 ---
 
 # Build and Fix Loop

@@ -1,6 +1,6 @@
 ---
 name: setup-dev-env
-description: Set up the development environment for the project. Use when starting work on the project or when dependencies might be out of sync.
+description: Set up the development environment for the project. Use when starting work on the project, when dependencies are out of sync, or to fix environment setup failures.
 ---
 
 # Setup Development Environment

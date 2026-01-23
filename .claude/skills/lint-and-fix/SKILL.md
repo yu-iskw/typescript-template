@@ -1,6 +1,6 @@
 ---
 name: lint-and-fix
-description: Run linters and fix violations using Trunk. Use when code quality checks fail or before submitting PRs.
+description: Run linters and fix violations, formatting errors, or style mismatches using Trunk. Use when code quality checks fail, before submitting PRs, or to repair "broken" linting states.
 ---
 
 # Lint and Fix Loop: Trunk
