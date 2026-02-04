@@ -1,0 +1,27 @@
+{
+  "name": "@calculator/api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculator REST API server",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@calculator/contracts": "workspace:*",
+    "@calculator/engine": "workspace:*",
+    "@hono/node-server": "^1.14.1",
+    "hono": "^4.7.4"
+  },
+  "devDependencies": {
+    "@calculator/tsconfig": "workspace:*",
+    "@types/node": "^22.14.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3"
+  }
+}

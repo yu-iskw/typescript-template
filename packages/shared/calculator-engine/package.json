@@ -1,0 +1,24 @@
+{
+  "name": "@calculator/engine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculator expression parser and evaluator",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@calculator/tsconfig": "workspace:*",
+    "typescript": "^5.9.3"
+  }
+}

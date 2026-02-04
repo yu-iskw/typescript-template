@@ -1,22 +1,27 @@
 {
-  "name": "typescript-template",
+  "name": "calculator-poc-monorepo",
   "version": "1.0.0",
   "private": true,
-  "description": "",
-  "keywords": [],
+  "description": "Calculator POC demonstrating multi-client monorepo architecture",
+  "keywords": ["calculator", "monorepo", "react", "expo", "mcp"],
   "license": "Apache-2.0",
   "author": "",
-  "main": "index.js",
   "scripts": {
-    "build": "pnpm --recursive build",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:api": "turbo run dev --filter=@calculator/api",
+    "dev:web": "turbo run dev --filter=@calculator/web",
+    "dev:mobile": "turbo run dev --filter=@calculator/mobile",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "turbo run clean && rm -rf node_modules",
     "format": "trunk fmt",
-    "format:all": "trunk fmt --all",
-    "lint": "trunk check",
-    "lint:all": "trunk check --all",
-    "lint:security": "trunk check --all --scope security",
-    "test": "vitest run"
+    "format:all": "trunk fmt --all"
   },
   "devDependencies": {
+    "turbo": "^2.4.4",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   },

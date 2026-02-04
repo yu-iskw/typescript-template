@@ -1,0 +1,8 @@
+# Tauri
+src-tauri/target/
+
+# Build output
+dist/
+
+# Debug
+*.pdb

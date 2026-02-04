@@ -1,0 +1,28 @@
+{
+  "name": "@calculator/web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculator web application",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@calculator/api-client": "workspace:*",
+    "@calculator/ui": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@calculator/tsconfig": "workspace:*",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.9.3",
+    "vite": "^6.2.5"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@calculator/desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculator desktop application (Tauri)",
+  "type": "module",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tsc --noEmit && vite build",
+    "build:tauri": "tauri build",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf src-tauri/target"
+  },
+  "dependencies": {
+    "@calculator/api-client": "workspace:*",
+    "@calculator/ui": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@calculator/tsconfig": "workspace:*",
+    "@tauri-apps/cli": "^2.2.7",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.9.3",
+    "vite": "^6.2.5"
+  }
+}

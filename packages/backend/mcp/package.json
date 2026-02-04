@@ -1,0 +1,30 @@
+{
+  "name": "@calculator/mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MCP server exposing calculator.evaluate tool",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "calculator-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@calculator/contracts": "workspace:*",
+    "@calculator/engine": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.11.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@calculator/tsconfig": "workspace:*",
+    "@types/node": "^22.14.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3"
+  }
+}

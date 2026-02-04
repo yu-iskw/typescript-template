@@ -1,0 +1,27 @@
+{
+  "name": "@calculator/contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared API contracts and Zod schemas",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@calculator/tsconfig": "workspace:*",
+    "typescript": "^5.9.3"
+  }
+}
