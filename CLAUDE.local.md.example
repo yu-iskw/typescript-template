@@ -1,0 +1,42 @@
+# Local Project Overrides
+
+> Copy this file to `CLAUDE.local.md` for personal preferences.
+> This file is auto-gitignored and won't be committed.
+
+## Personal Preferences
+
+<!-- Add your personal coding preferences here -->
+
+- Preferred editor: [Your editor]
+- Local environment notes: [Any local setup quirks]
+
+## Current Focus
+
+<!-- What you're working on -->
+
+- Current feature: [Description]
+- Blocked by: [Any blockers]
+
+## Session Notes
+
+<!-- Temporary notes for current session -->
+
+- [Note 1]
+- [Note 2]
+
+## Local Environment
+
+<!-- Environment-specific settings -->
+
+```bash
+# Example environment variables
+export DEBUG=true
+export NODE_ENV=development
+```
+
+## Personal Reminders
+
+<!-- Reminders that apply only to you -->
+
+- [ ] Review PR #123
+- [ ] Follow up on design discussion

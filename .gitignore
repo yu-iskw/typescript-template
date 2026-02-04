@@ -142,3 +142,7 @@ TODO.md
 .todo_list/
 
 *.bak
+
+# Claude Code local files (personal preferences)
+CLAUDE.local.md
+.claude/settings.local.json

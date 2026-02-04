@@ -1,0 +1,54 @@
+{
+  "$schema": "https://code.claude.com/schemas/settings.json",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📋 Review tasks/lessons.md for patterns to avoid. Check tasks/todo.md for current work.'"
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🔄 Context compacted. Remember: use pnpm (not npm), run tests before completing tasks, update lessons.md after corrections.'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✅ File modified. Remember to verify with: pnpm build && pnpm lint && pnpm test'"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm *)",
+      "Bash(git *)",
+      "Bash(trunk *)",
+      "Bash(node *)",
+      "Bash(npx *)",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(rm -rf /)*",
+      "Bash(sudo *)"
+    ]
+  }
+}
