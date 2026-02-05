@@ -62,7 +62,8 @@ jobs:
         with:
           node-version-file: .node-version
           registry-url: https://registry.npmjs.org
-          scope: '<YOUR_SCOPE>'
+          # TODO: Replace with your scope
+          scope: ''
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
       - name: Install dependencies
