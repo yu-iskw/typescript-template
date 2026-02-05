@@ -28,7 +28,21 @@ permissions:
   id-token: write
 
 jobs:
+  check-token:
+    name: Check if the NPM_TOKEN is set
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if the NPM_TOKEN is set
+        env:
+          NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}'
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "NPM_TOKEN is not set"
+            exit 1
+          fi
   publish:
+    needs:
+      - check-token
     name: Publish to npm
     runs-on: ubuntu-latest
     permissions:
@@ -48,7 +62,7 @@ jobs:
         with:
           node-version-file: .node-version
           registry-url: https://registry.npmjs.org
-          scope: "@typescript-template"
+          scope: '<YOUR_SCOPE>'
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
       - name: Install dependencies
@@ -62,6 +76,6 @@ jobs:
           pnpm test
       - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}'
         run: |
           pnpm -r publish --no-git-checks --access public
