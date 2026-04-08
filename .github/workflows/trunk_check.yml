@@ -40,3 +40,5 @@ jobs:
           egress-policy: audit
       - name: Trunk Check
         uses: trunk-io/trunk-action@v1
+        with:
+          setup-deps: true
