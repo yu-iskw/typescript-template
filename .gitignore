@@ -146,4 +146,8 @@ TODO.md
 .claude/logs/
 .claude/sessions/
 
+# CodeQL local artifacts
+codeql-db/
+codeql-results.sarif
+
 *.bak
