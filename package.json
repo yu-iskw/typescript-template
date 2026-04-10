@@ -8,6 +8,7 @@
   "author": "",
   "scripts": {
     "build": "pnpm --recursive build",
+    "trunk": "trunk",
     "format": "pnpm format:trunk",
     "format:all": "pnpm format:trunk-all",
     "format:eslint": "eslint . --fix",
@@ -18,12 +19,13 @@
     "lint:all": "pnpm lint:trunk-all",
     "lint:eslint": "eslint .",
     "lint:security": "trunk check --all --scope security",
-    "lint:trunk": "trunk check",
-    "lint:trunk-all": "trunk check --all",
+    "lint:trunk": "trunk check -y",
+    "lint:trunk-all": "trunk check --all -y",
     "knip": "knip",
     "test": "vitest run"
   },
   "devDependencies": {
+    "@trunkio/launcher": "^1.3.4",
     "@typescript-eslint/eslint-plugin": "^8.58.1",
     "@typescript-eslint/parser": "^8.58.1",
     "@vitest/eslint-plugin": "^1.6.14",
@@ -36,6 +38,11 @@
     "vitest": "^4.1.3"
   },
   "packageManager": "pnpm@10.28.1",
+  "pnpm": {
+    "overrides": {
+      "tar": "7.5.11"
+    }
+  },
   "engines": {
     "node": ">=24.13.0",
     "pnpm": ">=10.28.1"

@@ -14,7 +14,7 @@ This is a production-ready TypeScript monorepo template using modern tooling:
 ## Quick Commands
 
 ```bash
-pnpm install    # Install all dependencies
+pnpm install    # Install all dependencies (includes Trunk launcher; use pnpm lint/format below)
 pnpm build      # Build all packages
 pnpm test       # Run all tests via Vitest
 pnpm lint       # Run all linters via Trunk
@@ -58,7 +58,7 @@ pnpm clean      # Clean build artifacts
 - Always use `pnpm` instead of `npm` or `yarn`
 - Trunk manages tool versions hermetically - don't install linters globally
 - The `pnpm-lock.yaml` file is committed for reproducibility - don't gitignore it
-- Run `trunk install` if linters report missing tools
+- After `pnpm install`, the Trunk launcher is available via `node_modules/.bin`; the CLI version is pinned in `.trunk/trunk.yaml` (`cli.version`). Run `pnpm exec trunk install` if hermetic linters or formatters are missing
 
 ## Parallel Task Execution
 

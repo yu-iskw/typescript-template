@@ -11,11 +11,12 @@ This skill automates the process of setting up the development environment to en
 
 - [ ] **Step 1: Environment Validation**
   - [ ] Check Node.js version against `.node-version`
-  - [ ] Check for `trunk` installation
 - [ ] **Step 2: Dependency Installation**
-  - [ ] Run `pnpm install`
-- [ ] **Step 3: Tooling Setup**
-  - [ ] Run `trunk install` to fetch managed linters and formatters
+  - [ ] Run `pnpm install` (installs the Trunk launcher from `@trunkio/launcher` into `node_modules/.bin`)
+- [ ] **Step 3: Verify Trunk**
+  - [ ] Run `pnpm exec trunk --version` or `pnpm trunk --version`
+- [ ] **Step 4: Tooling Setup**
+  - [ ] Run `pnpm exec trunk install` to fetch managed linters and formatters (optional but recommended)
 
 ## Detailed Instructions
 
@@ -25,37 +26,39 @@ This skill automates the process of setting up the development environment to en
 
 Read the `.node-version` file in the workspace root. Ensure the current Node.js environment matches this version. If there's a mismatch, inform the user to switch Node versions (e.g., using `nvm` or `fnm`).
 
-#### Trunk CLI
-
-Check if `trunk` is installed by running `trunk --version`.
-If `trunk` is not found, advise the user to install it. On macOS, use:
-
-```bash
-brew install trunk-io
-```
-
-For other platforms, refer to the [Trunk installation documentation](https://docs.trunk.io/references/cli/getting-started/install).
-
 ### 2. Dependency Installation
 
-Run the following command at the workspace root to install all project dependencies. Refer to [../common-references/pnpm-commands.md](../common-references/pnpm-commands.md) for more pnpm commands.
+Run the following command at the workspace root to install all project dependencies. This brings the Trunk **launcher** into `node_modules/.bin` so `pnpm` scripts can run `trunk` without a global install. Refer to [../common-references/pnpm-commands.md](../common-references/pnpm-commands.md) for more pnpm commands.
 
 ```bash
 pnpm install
 ```
 
-### 3. Tooling Setup
+### 3. Verify Trunk
 
-Trunk manages linters and formatters hermetically. Run the following command to ensure all required tools are downloaded and ready. Refer to [../common-references/trunk-commands.md](../common-references/trunk-commands.md) for more Trunk commands.
+Confirm the launcher is available:
 
 ```bash
-trunk install
+pnpm exec trunk --version
+```
+
+If this fails, dependencies may be incomplete—re-run `pnpm install` at the repo root.
+
+If you need a global `trunk` on your PATH (optional), see the [Trunk installation guide](https://docs.trunk.io/references/cli/getting-started/install). On macOS, Homebrew (`brew install trunk-io`) is one option.
+
+### 4. Tooling Setup
+
+Trunk manages linters and formatters hermetically. Run the following command to ensure all required tools are downloaded and ready. Refer to [../common-references/trunk-commands.md](../common-references/trunk-commands.md) (including **Trunk in this repository (pnpm)**) for more Trunk commands.
+
+```bash
+pnpm exec trunk install
 ```
 
 ## Success Criteria
 
 - All `pnpm` dependencies are installed successfully.
-- `trunk` is installed and all managed tools are initialized.
+- `pnpm exec trunk --version` succeeds.
+- Managed Trunk tools are initialized if you ran `pnpm exec trunk install`.
 - The Node.js version matches the requirement in `.node-version`.
 
 ## Post-Setup Verification
