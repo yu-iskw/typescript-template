@@ -8,26 +8,22 @@
 
 - [pnpm](https://pnpm.io/)
 - Node.js (see `.node-version`)
-- [Trunk](https://trunk.io/) (for linting and formatting)
+
+Linting and formatting use [Trunk](https://trunk.io/) (ESLint, Prettier, and more). The Trunk **launcher** is installed with project dependencies—you do not need a separate Trunk install for the default workflow.
 
 ### Installation
 
-#### Install Trunk
-
-On macOS, you can install Trunk using Homebrew:
-
-```bash
-brew install trunk-io
-```
-
-For other platforms, see the [Trunk installation guide](https://docs.trunk.io/references/cli/getting-started/install).
-
-#### Install Dependencies
-
 ```bash
 pnpm install
-trunk install
 ```
+
+Optional: prefetch Trunk’s hermetic tools (helpful for offline work or CI images):
+
+```bash
+pnpm exec trunk install
+```
+
+If you prefer a global `trunk` on your PATH, see the [Trunk installation guide](https://docs.trunk.io/references/cli/getting-started/install) (e.g. `brew install trunk-io` on macOS).
 
 ### Development
 
