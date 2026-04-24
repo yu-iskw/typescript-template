@@ -24,13 +24,24 @@ Production-ready **TypeScript monorepo** template:
 ## Quick commands
 
 ```bash
-pnpm install    # Dependencies (includes Trunk launcher; use pnpm lint/format below)
+pnpm install    # Dependencies (includes Trunk launcher; auto-syncs Trunk git hooks)
+pnpm hooks:install # Manually (re)sync Trunk git hooks if needed
 pnpm build      # Build all packages
 pnpm test       # Vitest across the workspace
 pnpm lint       # Trunk linters
 pnpm format     # Trunk formatters
 pnpm clean      # Clean build artifacts
 ```
+
+
+## Agent bootstrap (required for cloud coding agents)
+
+For Codex, Claude Code, Cursor, and Copilot coding agents, always do this before editing code:
+
+1. `pnpm install` (runs `postinstall` and syncs Trunk git hooks)
+2. `pnpm hooks:install` if hooks were skipped or `.git/hooks` was reset
+
+This keeps local commits/pushes aligned with CI by running Trunk actions on `pre-commit`/`pre-push`.
 
 ## pnpm workspace
 
