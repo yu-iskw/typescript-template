@@ -20,7 +20,7 @@ Before making any changes, verify the current state of the project:
 
 ## 2. Upgrade Execution
 
-Choose the appropriate upgrade path based on the user's request. Refer to [../common-references/pnpm-commands.md](../common-references/pnpm-commands.md) for pnpm-specific commands.
+Choose the appropriate upgrade path based on the user's request (for example `pnpm update <package>` for targeted updates or `pnpm update` for broader maintenance).
 
 ### Targeted Upgrade (Recommended)
 
@@ -40,7 +40,7 @@ Use this for general dependency maintenance.
 
 After the upgrade, ensure the project remains stable by delegating to the project verifier:
 
-1. **Invoke Verifier**: Use the `verifier` subagent ([../../agents/verifier.md](../../agents/verifier.md)) to run the full build, lint, and test cycle.
+1. **Invoke Verifier**: Use the `verifier` subagent (see `.claude/agents/verifier.md`) to run the full build, lint, and test cycle.
 2. **Handle Failure**: If the `verifier` reports persistent issues it cannot fix, analyze the breaking changes and apply manual fixes or roll back.
 3. **Final Audit**: Once the verifier passes, run `pnpm audit` again to ensure no new vulnerabilities were introduced.
 

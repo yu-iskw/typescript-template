@@ -28,7 +28,7 @@ Read the `.node-version` file in the workspace root. Ensure the current Node.js 
 
 ### 2. Dependency Installation
 
-Run the following command at the workspace root to install all project dependencies. This brings the Trunk **launcher** into `node_modules/.bin` so `pnpm` scripts can run `trunk` without a global install. Refer to [../common-references/pnpm-commands.md](../common-references/pnpm-commands.md) for more pnpm commands.
+Run the following command at the workspace root to install all project dependencies. This brings the Trunk **launcher** into `node_modules/.bin` so `pnpm` scripts can run `trunk` without a global install.
 
 ```bash
 pnpm install
@@ -48,7 +48,7 @@ If you need a global `trunk` on your PATH (optional), see the [Trunk installatio
 
 ### 4. Tooling Setup
 
-Trunk manages linters and formatters hermetically. Run the following command to ensure all required tools are downloaded and ready. Refer to [../common-references/trunk-commands.md](../common-references/trunk-commands.md) (including **Trunk in this repository (pnpm)**) for more Trunk commands.
+Trunk manages linters and formatters hermetically. Run the following command to ensure all required tools are downloaded and ready. Use `pnpm lint`, `pnpm format`, and `pnpm exec trunk install` as needed for this repository.
 
 ```bash
 pnpm exec trunk install
@@ -65,5 +65,5 @@ pnpm exec trunk install
 
 To ensure the environment is fully operational:
 
-1. **Invoke Verifier**: Run the `verifier` subagent ([../../agents/verifier.md](../../agents/verifier.md)). This confirms that the freshly installed dependencies allow for a successful build, pass lint checks, and satisfy all unit tests.
+1. **Invoke Verifier**: Run the `verifier` subagent (see `.claude/agents/verifier.md`). This confirms that the freshly installed dependencies allow for a successful build, pass lint checks, and satisfy all unit tests.
 2. **Handle Failure**: If the `verifier` fails, follow its reporting to resolve environment-specific issues.

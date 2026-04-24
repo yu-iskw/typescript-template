@@ -2,36 +2,33 @@
 
 This directory contains the Claude Code configuration for AI-assisted development.
 
+**Shared project instructions** for all coding agents live in the repository root **`AGENTS.md`**. Root **`CLAUDE.md`** imports that file with **`@AGENTS.md`** (see [Anthropic: AGENTS.md](https://docs.anthropic.com/en/docs/claude-code/claude-md#agentsmd)) and then adds **Claude-only** sections (skills, agents, hooks). The first time you open the project, Claude may ask you to **approve external file includes** so `@AGENTS.md` is expanded into context.
+
 ## Structure
 
 ```text
 .claude/
 ├── README.md              # This file
 ├── settings.json          # Hooks, permissions, and environment
-├── agents/                # Specialized subagents
-│   ├── verifier.md       # Build/lint/test verification
-│   ├── code-reviewer.md  # Code quality and security review
-│   ├── parallel-executor.md      # Orchestrates parallel task execution
-│   ├── parallel-tasks-planner.md # Plans task decomposition
-│   └── task-worker.md    # Executes isolated subtasks
-├── skills/               # Reusable workflows and knowledge
-│   ├── build-and-fix/    # Auto-fix build errors
-│   ├── clean-project/    # Hard reset environment
-│   ├── common-references/ # Shared documentation
-│   ├── fix-issue/        # GitHub issue workflow
-│   ├── improve-claude-config/ # Self-improvement skill
-│   ├── initialize-project/ # Template bootstrapping
-│   ├── lint-and-fix/     # Auto-fix linting issues
-│   ├── manage-adr/       # ADR management
-│   ├── manage-changelog/ # Changelog management
-│   ├── node-upgrade/     # Dependency upgrades
-│   ├── security-vulnerability-audit/ # Security scanning
-│   ├── setup-dev-env/    # Environment setup
-│   └── test-and-fix/     # Auto-fix failing tests
-└── hooks/                # Hook scripts
-    ├── block-dangerous.sh # Block dangerous commands
-    ├── format-ts.sh       # Auto-format TS files
-    └── validate-commit.sh # Validate commit messages
+├── agents/                # Specialized subagents (Cursor-compatible markdown)
+│   └── verifier.md
+├── skills/                # Reusable workflows (slash commands)
+│   ├── build-and-fix/
+│   ├── codeql-fix/
+│   ├── improve-claude-config/
+│   ├── initialize-project/
+│   ├── lint-and-fix/
+│   ├── manage-adr/
+│   ├── node-upgrade/
+│   ├── postmortem/
+│   ├── security-scan/
+│   ├── security-vulnerability-audit/
+│   ├── setup-dev-env/
+│   └── test-and-fix/
+└── hooks/
+    ├── block-dangerous.sh
+    ├── format-ts.sh
+    └── validate-commit.sh
 ```
 
 ## Quick Start
@@ -41,71 +38,19 @@ This directory contains the Claude Code configuration for AI-assisted developmen
 Invoke skills with slash commands:
 
 ```bash
-/setup-dev-env          # Set up your development environment
-/lint-and-fix           # Fix all linting issues
-/test-and-fix           # Fix failing tests
-/fix-issue 123          # Fix GitHub issue #123
-/parallel-executor <task> # Execute complex tasks in parallel
+/setup-dev-env
+/lint-and-fix
+/test-and-fix
 ```
 
 ### Using Agents
 
 Agents are specialized assistants invoked via the Task tool:
+The `verifier` agent is skill-driven and must delegate each phase to the listed skills in `.claude/agents/verifier.md`.
 
-| Agent                      | Purpose                                     |
-| -------------------------- | ------------------------------------------- |
-| **verifier**               | Runs build → lint → test cycle              |
-| **code-reviewer**          | Reviews code for quality and security       |
-| **parallel-executor**      | Orchestrates parallel task execution        |
-| **parallel-tasks-planner** | Creates execution plans with file ownership |
-| **task-worker**            | Executes isolated subtasks with constraints |
-
-### Parallel Execution
-
-For large tasks that can benefit from concurrent work:
-
-```bash
-/parallel-executor Add comprehensive logging to all modules
-```
-
-**Architecture:**
-
-```text
-/parallel-executor "task description"
-        │
-        ▼
-┌───────────────────────┐
-│  parallel-executor    │  ← Orchestrator agent
-│       agent           │
-└───────────┬───────────┘
-            │
-            ▼
-┌───────────────────────┐
-│ parallel-tasks-planner│  ← Creates execution plan
-│       agent           │
-└───────────┬───────────┘
-            │
-            ▼ (YAML plan with phases & file ownership)
-            │
-┌───────────┴───────────┐
-│   Phase Execution     │
-│                       │
-│  Phase 1 (Parallel):  │
-│  ┌─────┐  ┌─────┐    │
-│  │ W1  │  │ W2  │    │  ← task-worker agents
-│  └─────┘  └─────┘    │
-│                       │
-│  Phase 2 (Sequential):│
-│  ┌──────────────┐    │
-│  │     W3       │    │
-│  └──────────────┘    │
-└───────────┬───────────┘
-            │
-            ▼
-┌───────────────────────┐
-│   verifier agent      │  ← Verification
-└───────────────────────┐
-```
+| Agent        | Purpose                        |
+| ------------ | ------------------------------ |
+| **verifier** | Runs build → lint → test cycle |
 
 ### Self-Improvement
 
@@ -124,22 +69,20 @@ Contains:
 - **permissions**: Allowed and denied commands
 - **hooks**: Automatic triggers for tool events
 
-### CLAUDE.md (in project root)
+### AGENTS.md (repository root)
 
-Project memory loaded at session start. Contains:
+Canonical instructions for **all** coding agents (stack, commands, quality gates, style). Update this file when repo-wide behavior should change for everyone.
 
-- Quick commands reference
-- Code style conventions
-- Testing workflow
-- Common gotchas
+### CLAUDE.md (repository root)
+
+Composes **`@AGENTS.md`** plus Claude-specific tables (skills, agents, self-improvement). Keep the Claude-only portion concise; prefer **`AGENTS.md`** for shared guidance.
 
 ## Best Practices
 
-1. **Keep CLAUDE.md concise**: Under 100 lines, move details to skills
-2. **Use specific skills**: Don't duplicate knowledge across skills
-3. **Test hooks**: Validate hook scripts work before committing
-4. **Version control**: Commit configuration changes with clear messages
-5. **Self-improve**: Add rules when Claude makes repeated mistakes
+1. **Keep shared guidance in `AGENTS.md`** so Cursor, Codex, Copilot, and Gemini stay aligned.
+2. **Keep the Claude-only tail of `CLAUDE.md` small**; move long procedural detail into `.claude/skills/`.
+3. **Test hooks** before committing changes to `.claude/hooks/`.
+4. **Version control** `.claude/` and root instruction files together with clear commit messages.
 
 ## Customization
 
@@ -153,7 +96,7 @@ Project memory loaded at session start. Contains:
 
 1. Create script in `.claude/hooks/`
 2. Make executable: `chmod +x .claude/hooks/<script>.sh`
-3. Register in `.claude/settings.json` under appropriate event
+3. Register in `.claude/settings.json` under the appropriate event
 
 ### Adding a New Agent
 
