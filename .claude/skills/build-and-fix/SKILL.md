@@ -15,7 +15,6 @@ An autonomous loop for the agent to identify, analyze, and fix build errors usin
 2. **Analyze**: Examine the build output to determine:
    - The failing package and file.
    - The specific compiler or build error message.
-   - Refer to [../common-references/troubleshooting.md](../common-references/troubleshooting.md) for common TS errors.
 3. **Fix**: Apply the minimum necessary change to resolve the error (e.g., fixing TypeScript types, correcting imports, or updating configurations).
 4. **Verify**: Re-run `pnpm build`.
    - If passed: Finish.
@@ -36,5 +35,4 @@ An autonomous loop for the agent to identify, analyze, and fix build errors usin
 
 ## Resources
 
-- [pnpm Commands for Node.js](../common-references/pnpm-commands.md): Common commands for building and managing dependencies.
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/): Official documentation for TypeScript.

@@ -26,7 +26,10 @@ Invoke this skill when:
 Read and understand the current configuration:
 
 ```bash
-# View CLAUDE.md
+# Shared instructions (all agents)
+read_file AGENTS.md
+
+# Claude-only tail (skills, agents, learnings)
 read_file CLAUDE.md
 
 # List all skills
@@ -41,25 +44,21 @@ read_file .claude/settings.json
 
 ### 2. Identify Improvement Opportunity
 
-| Pattern                     | Action                             |
-| --------------------------- | ---------------------------------- |
-| Repeated explanation        | Add to CLAUDE.md or create a skill |
-| Recurring mistake           | Add rule to CLAUDE.md              |
-| Manual repetitive task      | Create a hook                      |
-| Complex workflow            | Create a skill                     |
-| Specialized task delegation | Create an agent                    |
+| Pattern                     | Action                                             |
+| --------------------------- | -------------------------------------------------- |
+| Repeated explanation        | Add to `AGENTS.md` or create a skill               |
+| Recurring mistake           | Add rule to `AGENTS.md` (shared) or create a skill |
+| Manual repetitive task      | Create a hook                                      |
+| Complex workflow            | Create a skill                                     |
+| Specialized task delegation | Create an agent                                    |
 
 ### 3. Implement Improvement
 
-#### Adding Rules to CLAUDE.md
+#### Adding shared rules
 
-For project conventions or gotchas Claude keeps forgetting:
+For repo-wide conventions or gotchas every agent should follow, edit **`AGENTS.md`**.
 
-```markdown
-## Recent Learnings (append to CLAUDE.md)
-
-- [Date]: Description of rule and why it matters
-```
+For Claude-only notes (slash commands, hook behavior), append under **`## Claude Code`** or **Recent learnings** in **`CLAUDE.md`**.
 
 #### Creating a New Skill
 
