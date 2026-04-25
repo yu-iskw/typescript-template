@@ -34,7 +34,6 @@ pnpm format     # Trunk formatters
 pnpm clean      # Clean build artifacts
 ```
 
-
 ## Agent bootstrap (required for cloud coding agents)
 
 For Codex, Claude Code, Cursor, and Copilot coding agents, run this before editing code:
