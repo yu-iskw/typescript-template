@@ -13,9 +13,9 @@ try {
 }
 
 try {
-  execSync('pnpm exec trunk git-hooks sync', { stdio: 'inherit' });
+  execSync('trunk git-hooks sync', { stdio: 'inherit' });
 } catch {
   console.warn(
-    '[trunk-hooks] Unable to sync Trunk git hooks. Run `pnpm exec trunk git-hooks sync` manually once networking is available.',
+    '[trunk-hooks] Unable to sync Trunk git hooks. Run `trunk git-hooks sync` manually once networking is available.',
   );
 }

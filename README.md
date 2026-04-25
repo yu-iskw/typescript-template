@@ -17,16 +17,16 @@ Linting and formatting use [Trunk](https://trunk.io/) (ESLint, Prettier, and mor
 pnpm install
 ```
 
-Install or resync Trunk-managed git hooks (recommended for contributors and coding agents):
+Install Trunk-managed tools and sync git hooks (recommended for contributors and coding agents):
+
+```bash
+pnpm setup:trunk
+```
+
+If you only need to resync git hooks after `.git/hooks` changes:
 
 ```bash
 pnpm hooks:install
-```
-
-Optional: prefetch Trunk’s hermetic tools (helpful for offline work or CI images):
-
-```bash
-pnpm exec trunk install
 ```
 
 If you prefer a global `trunk` on your PATH, see the [Trunk installation guide](https://docs.trunk.io/references/cli/getting-started/install) (e.g. `brew install trunk-io` on macOS).
