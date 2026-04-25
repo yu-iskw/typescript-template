@@ -24,13 +24,32 @@ Production-ready **TypeScript monorepo** template:
 ## Quick commands
 
 ```bash
-pnpm install    # Dependencies (includes Trunk launcher; use pnpm lint/format below)
-pnpm build      # Build all packages
-pnpm test       # Vitest across the workspace
-pnpm lint       # Trunk linters
-pnpm format     # Trunk formatters
-pnpm clean      # Clean build artifacts
+pnpm install       # Install deps and auto-sync Trunk git hooks (pre-commit/pre-push)
+pnpm hooks:install # Re-sync Trunk git hooks manually (safe to run anytime)
+pnpm build         # Build all packages
+pnpm test          # Vitest across the workspace
+pnpm lint          # Trunk linters
+pnpm format        # Trunk formatters
+pnpm clean         # Clean build artifacts
 ```
+
+## Agent bootstrap (required for cloud coding agents)
+
+Cloud agents (Claude Code, Codex, Cursor, Copilot) run in ephemeral environments where Trunk git hooks are not pre-installed. Without hooks, commits and pushes bypass local lint/format checks and CI failures are the first signal.
+
+**Run once after cloning or when starting a session:**
+
+```bash
+pnpm install       # Installs deps + syncs Trunk hooks via postinstall
+```
+
+Or explicitly:
+
+```bash
+pnpm hooks:install
+```
+
+This runs `trunk git-hooks sync`, wiring up `trunk-fmt-pre-commit` and `trunk-check-pre-push` so local commits stay aligned with CI. The script is non-fatal in network-restricted environments (warns instead of failing). Set `SKIP_TRUNK_GIT_HOOKS=1` to bypass entirely.
 
 ## pnpm workspace
 

@@ -24,6 +24,8 @@
     "security:grype": "grype .",
     "knip": "knip",
     "codeql:local": "bash dev/codeql.sh",
+    "hooks:install": "node dev/sync-trunk-git-hooks.mjs",
+    "postinstall": "pnpm hooks:install",
     "test": "vitest run"
   },
   "devDependencies": {
