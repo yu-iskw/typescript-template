@@ -14,6 +14,7 @@ This directory contains the Claude Code configuration for AI-assisted developmen
 │   └── verifier.md
 ├── skills/                # Reusable workflows (slash commands)
 │   ├── build-and-fix/
+│   ├── check-directory-structure/
 │   ├── codeql-fix/
 │   ├── improve-claude-config/
 │   ├── initialize-project/
