@@ -3,6 +3,7 @@ packages:
 
 # Supply-chain protection (pnpm 11 defaults, with 7-day quarantine)
 # https://pnpm.io/blog/releases/11.0
+# https://socket.dev/blog/pnpm-11-adds-new-supply-chain-protection-defaults
 minimumReleaseAge: 10080 # 7 days * 1440 min; override of v11 default of 1440 (1 day)
 blockExoticSubdeps: true # explicit; matches v11 default
 
