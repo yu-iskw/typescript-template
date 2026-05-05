@@ -36,6 +36,7 @@ pnpm clean      # Clean build artifacts
 
 This repository is a pnpm workspace (see `pnpm-workspace.yaml`).
 
+- **pnpm 11:** pnpm-specific config (overrides, security, `allowBuilds`, etc.) lives in **`pnpm-workspace.yaml`**, not in `package.json#pnpm` (removed in pnpm 11) or in non-auth `.npmrc` files.
 - **Install:** `pnpm install`
 - **Add dependency:** current package `pnpm add <pkg>`; dev `pnpm add -D <pkg>`; workspace root `pnpm add -w <pkg>`
 - **Run scripts:** this package `pnpm <script>`; all packages `pnpm -r <script>`; one package `pnpm --filter <pkg-name> <script>`
@@ -106,6 +107,7 @@ When you want durable fixes (not one-off chat advice):
 ## Common gotchas
 
 - Always use **pnpm**, not npm or yarn
+- **Supply chain:** `minimumReleaseAge` is **7 days** (new registry versions are not installed until that age). `blockExoticSubdeps` is **on**. If install fails with ignored build scripts, run **`pnpm approve-builds`** or add the package under **`allowBuilds`** in `pnpm-workspace.yaml`.
 - Do not install Trunk-managed linters globally; versions live in `.trunk/trunk.yaml`
 - Commit **`pnpm-lock.yaml`**
 - After `pnpm install`, Trunk is under `node_modules/.bin`; pin is in `.trunk/trunk.yaml` (`cli.version`). Run `pnpm exec trunk install` if formatters/linters are missing
