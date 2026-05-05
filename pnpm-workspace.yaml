@@ -1,2 +1,13 @@
 packages:
   - packages/*
+
+# pnpm 11 supply-chain guardrails. Keep package-manager settings here because
+# pnpm 11 no longer reads non-registry config from package.json or .npmrc.
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: false
+blockExoticSubdeps: true
+strictDepBuilds: true
+verifyDepsBeforeRun: install
+
+overrides:
+  tar: 7.5.11
