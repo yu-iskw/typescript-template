@@ -6,7 +6,7 @@
 
 ### Prerequisites
 
-- [pnpm](https://pnpm.io/)
+- [pnpm](https://pnpm.io/) 11 or later
 - Node.js (see `.node-version`)
 
 Linting and formatting use [Trunk](https://trunk.io/) (ESLint, Prettier, and more). The Trunk **launcher** is installed with project dependencies—you do not need a separate Trunk install for the default workflow.
@@ -16,6 +16,13 @@ Linting and formatting use [Trunk](https://trunk.io/) (ESLint, Prettier, and mor
 ```bash
 pnpm install
 ```
+
+This template uses pnpm 11 supply-chain guardrails configured in `pnpm-workspace.yaml`:
+
+- `minimumReleaseAge: 1440` delays newly published dependency versions for 24 hours.
+- `blockExoticSubdeps: true` blocks dependencies that are pulled from non-registry sources by transitive dependencies.
+- `strictDepBuilds: true` fails installs when dependency lifecycle scripts are not explicitly allowed.
+- `verifyDepsBeforeRun: install` verifies dependencies before running scripts and repairs them when needed.
 
 Optional: prefetch Trunk’s hermetic tools (helpful for offline work or CI images):
 
