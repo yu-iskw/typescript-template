@@ -9,5 +9,10 @@ blockExoticSubdeps: true
 strictDepBuilds: true
 verifyDepsBeforeRun: install
 
+# Keep dependency lifecycle scripts explicit under strictDepBuilds.
+allowBuilds:
+  '@trunkio/launcher': true
+  esbuild: true
+
 overrides:
   tar: 7.5.11
