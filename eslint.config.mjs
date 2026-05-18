@@ -53,11 +53,12 @@ const importXRules = {
 
 /**
  * Shared production + test rules (AI agent feedback).
+ * Type-aware TypeScript rules catch unsafe agent-written code without custom scripts.
  * Cyclomatic: only SonarJS (core `complexity` removed — duplicated sonarjs/cyclomatic-complexity).
  * Cognitive: sonarjs/cognitive-complexity (primary “hard to change” signal).
  * Structural: max-depth / max-params / max-nested-callbacks (catch wide APIs / deep nesting).
  */
-const sharedTsRules = Object.assign({}, tseslint.configs.recommended.rules, {
+const sharedTsRules = Object.assign({}, tseslint.configs['recommended-type-checked'].rules, {
   '@typescript-eslint/no-explicit-any': 'error',
   '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   '@typescript-eslint/no-floating-promises': 'error',
@@ -66,6 +67,12 @@ const sharedTsRules = Object.assign({}, tseslint.configs.recommended.rules, {
     'error',
     { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
   ],
+  '@typescript-eslint/switch-exhaustiveness-check': 'error',
+  '@typescript-eslint/no-unnecessary-condition': 'error',
+  '@typescript-eslint/only-throw-error': 'error',
+  '@typescript-eslint/prefer-promise-reject-errors': 'error',
+  '@typescript-eslint/require-array-sort-compare': 'error',
+  '@typescript-eslint/member-ordering': 'error',
   // Security (core + plugin; Trunk still runs Trivy/OSV)
   'no-eval': 'error',
   'no-implied-eval': 'error',
@@ -95,6 +102,7 @@ export default [
   {
     ignores: [
       '**/node_modules/**',
+      '.pnpm-store/**',
       '**/dist/**',
       '**/dist-serve/**',
       '.claude/**',
