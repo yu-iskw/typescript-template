@@ -105,6 +105,7 @@ export default [
       '.pnpm-store/**',
       '**/dist/**',
       '**/dist-serve/**',
+      '**/coverage/**',
       '.claude/**',
       '.cursor/**',
       '.serena/**',
@@ -172,7 +173,7 @@ export default [
   },
   {
     files: ['**/*.js'],
-    ignores: ['**/dist/**', '**/node_modules/**'],
+    ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'script',
