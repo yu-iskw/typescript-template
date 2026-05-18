@@ -115,7 +115,7 @@ export default [
   },
   {
     files: ['packages/**/*.ts', 'packages/**/*.tsx'],
-    ignores: ['**/dist/**', '**/*.test.ts', '**/*.test.tsx'],
+    ignores: ['**/dist/**', '**/*.config.ts', '**/*.test.ts', '**/*.test.tsx'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
