@@ -107,7 +107,8 @@ When you want durable fixes (not one-off chat advice):
 ## Common gotchas
 
 - Always use **pnpm**, not npm or yarn
-- **Supply chain:** `minimumReleaseAge` is **7 days** (new registry versions are not installed until that age). `blockExoticSubdeps` is **on**. If install fails with ignored build scripts, run **`pnpm approve-builds`** or add the package under **`allowBuilds`** in `pnpm-workspace.yaml`.
+- **Supply chain:** `minimumReleaseAge` is **7 days** for **pnpm** (new npm registry versions are not installed until that age). **mise** uses the same policy via `minimum_release_age = "7d"` in `mise.toml`. `blockExoticSubdeps` is **on**. If install fails with ignored build scripts, run **`pnpm approve-builds`** or add the package under **`allowBuilds`** in `pnpm-workspace.yaml`.
+- **mise:** Run **`mise trust`** once per clone before **`mise install`**. Commit **`mise.lock`** when tool pins change. Aqua-backed tools (trivy, osv-scanner) verify with Sigstore/cosign at install time—ensure outbound access to `tuf-repo-cdn.sigstore.dev` or use an environment that allows it.
 - Do not install Trunk-managed linters globally; versions live in `.trunk/trunk.yaml`
 - Commit **`pnpm-lock.yaml`**
 - After `pnpm install`, Trunk is under `node_modules/.bin`; pin is in `.trunk/trunk.yaml` (`cli.version`). Run `pnpm exec trunk install` if formatters/linters are missing

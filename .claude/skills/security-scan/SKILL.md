@@ -1,7 +1,7 @@
 ---
 name: security-scan
 description: Scan for vulnerable dependencies and CVEs via pnpm lint:security (Trunk Trivy/OSV-scanner), optional pnpm security:grype or pnpm lint:all (Trunk-all plus Grype). Use for dependency CVE checks, security-scoped lint, or post-bump verification.
-compatibility: Node and pnpm versions per `.node-version` and root `package.json` `engines`; run `pnpm install` from repo root. Run `pnpm exec trunk install` if Trunk-managed linters are missing (see AGENTS.md). `grype` must be on PATH for `pnpm security:grype` and the Grype step in `pnpm lint:all`.
+compatibility: Node and pnpm versions per `.node-version` and root `package.json` `engines`; run `pnpm install` from repo root. Run `pnpm exec trunk install` if Trunk-managed linters are missing (see AGENTS.md). `grype` must be on PATH for `pnpm security:grype` and the Grype step in `pnpm lint:all` — install via **`mise install`** (see [`mise.toml`](../../../mise.toml)) or another method.
 ---
 
 # Security scan: vulnerable dependencies

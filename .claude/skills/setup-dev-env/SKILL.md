@@ -24,7 +24,18 @@ This skill automates the process of setting up the development environment to en
 
 #### Node.js Version
 
-Read the `.node-version` file in the workspace root. Ensure the current Node.js environment matches this version. If there's a mismatch, inform the user to switch Node versions (e.g., using `nvm` or `fnm`).
+Read the `.node-version` file in the workspace root. Ensure the current Node.js environment matches this version.
+
+**Preferred (this repo):** [mise](https://mise.jdx.dev/) reads `.node-version` when `idiomatic_version_file_enable_tools` includes `node` in [`mise.toml`](../../../mise.toml). After installing mise, run:
+
+```bash
+mise trust
+mise install   # or: pnpm setup:tools
+```
+
+This also pins **pnpm**, **grype**, **codeql**, **trivy**, and **osv-scanner** with the same **7-day** [`minimum_release_age`](https://mise.jdx.dev/configuration/settings.html#minimum_release_age) as pnpm’s `minimumReleaseAge`.
+
+If mise is not used, switch Node with **nvm** or **fnm** to match `.node-version`.
 
 ### 2. Dependency Installation
 

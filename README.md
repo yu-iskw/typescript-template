@@ -7,9 +7,19 @@
 ### Prerequisites
 
 - [pnpm](https://pnpm.io/)
-- Node.js (see `.node-version`)
+- Node.js (see `.node-version`), or [mise](https://mise.jdx.dev/) to install Node and other pinned CLIs from [`mise.toml`](mise.toml)
 
 Linting and formatting use [Trunk](https://trunk.io/) (ESLint, Prettier, and more). The Trunk **launcher** is installed with project dependencies—you do not need a separate Trunk install for the default workflow.
+
+Optional: install security CLIs and match the repo’s **7-day** release quarantine (pnpm + mise):
+
+```bash
+# https://mise.jdx.dev/getting-started.html
+mise trust
+mise install   # or: pnpm setup:tools
+```
+
+Pins **grype**, **codeql**, **trivy**, and **osv-scanner** for local scripts; Trunk still runs trivy/osv-scanner during `pnpm lint:security`.
 
 ### Installation
 

@@ -1,0 +1,17 @@
+# Pin CLI versions for local dev and CI. Aligns supply-chain policy with pnpm (7-day quarantine).
+# https://mise.jdx.dev/configuration/settings.html#minimum_release_age
+# https://pnpm.io/settings#minimumreleaseage
+
+[settings]
+minimum_release_age = "7d"
+lockfile = true
+idiomatic_version_file_enable_tools = ["node"]
+
+[tools]
+node = "24.13.0"
+pnpm = "11.0.0"
+# Security scanners (versions aligned with .trunk/trunk.yaml where applicable)
+trivy = "0.69.3"
+"osv-scanner" = "2.3.1"
+grype = "0.112.0"
+codeql = "2.25.4"
