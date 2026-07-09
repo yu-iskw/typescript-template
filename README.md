@@ -43,6 +43,8 @@ pnpm dev
 pnpm build
 ```
 
+Build uses **TypeScript 7** (`tsc` from `@typescript/native`). Type-aware ESLint still uses the **TypeScript 6** API via the `typescript` → `@typescript/typescript6` alias until TypeScript 7.1 ships a stable Compiler API.
+
 ### Linting & Formatting
 
 ```bash
