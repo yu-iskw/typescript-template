@@ -33,14 +33,20 @@ The template uses **pnpm 11** with settings in [`pnpm-workspace.yaml`](pnpm-work
 
 ### SBOM and vulnerability checks
 
-The [`SBOM` workflow](.github/workflows/sbom.yml) runs for pull requests, pushes to `main`, a weekly schedule, and manual dispatches. It:
+The [`SBOM` workflow](.github/workflows/sbom.yml) runs for pull requests,
+pushes to `main`, a weekly schedule, and manual dispatches. It:
 
 1. installs the workspace from the frozen pnpm lockfile;
-2. generates a commit-specific SPDX JSON SBOM with [Syft](https://github.com/anchore/syft);
+2. generates a commit-specific SPDX JSON SBOM with
+   [Syft](https://github.com/anchore/syft);
 3. retains the SBOM as a workflow artifact for 14 days; and
-4. scans that exact SBOM with [Grype](https://github.com/anchore/grype), failing on High or Critical vulnerabilities.
+4. scans that exact SBOM with [Grype](https://github.com/anchore/grype),
+   failing on High or Critical vulnerabilities.
 
-The workflow intentionally reports vulnerabilities even when no fix is currently available. Add narrowly scoped entries to a repository-level `.grype.yaml` only after documenting the risk acceptance and an expiry or review date.
+The workflow intentionally reports vulnerabilities even when no fix is
+currently available. Add narrowly scoped entries to a repository-level
+`.grype.yaml` only after documenting the risk acceptance and an expiry or
+review date.
 
 To reproduce the check locally, install Syft and Grype and run:
 
