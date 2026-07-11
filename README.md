@@ -37,11 +37,10 @@ The [`SBOM` workflow](.github/workflows/sbom.yml) runs for pull requests,
 pushes to `main`, a weekly schedule, and manual dispatches. It:
 
 1. installs the workspace from the frozen pnpm lockfile;
-2. generates a commit-specific SPDX JSON SBOM with
-   [Syft](https://github.com/anchore/syft);
+2. generates a commit-specific SPDX JSON SBOM with Syft;
 3. retains the SBOM as a workflow artifact for 14 days; and
-4. scans that exact SBOM with [Grype](https://github.com/anchore/grype),
-   failing on High or Critical vulnerabilities.
+4. scans that exact SBOM with Grype, failing on High or Critical
+   vulnerabilities.
 
 The workflow intentionally reports vulnerabilities even when no fix is
 currently available. Add narrowly scoped entries to a repository-level
