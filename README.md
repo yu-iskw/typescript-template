@@ -31,6 +31,25 @@ If you prefer a global `trunk` on your PATH, see the [Trunk installation guide](
 
 The template uses **pnpm 11** with settings in [`pnpm-workspace.yaml`](pnpm-workspace.yaml): a **7-day** [`minimumReleaseAge`](https://pnpm.io/settings#minimumreleaseage) (10080 minutes, stricter than pnpm’s default 1 day), [`blockExoticSubdeps`](https://pnpm.io/settings#blockexoticsubdeps) enabled, and an [`allowBuilds`](https://pnpm.io/settings#allowbuilds) map for dependencies that must run install scripts (pnpm 11 requires this for native toolchain packages such as esbuild). See the [pnpm 11 release notes](https://pnpm.io/blog/releases/11.0).
 
+### SBOM and vulnerability checks
+
+The [`SBOM` workflow](.github/workflows/sbom.yml) runs for pull requests, pushes to `main`, a weekly schedule, and manual dispatches. It:
+
+1. installs the workspace from the frozen pnpm lockfile;
+2. generates a commit-specific SPDX JSON SBOM with [Syft](https://github.com/anchore/syft);
+3. retains the SBOM as a workflow artifact for 14 days; and
+4. scans that exact SBOM with [Grype](https://github.com/anchore/grype), failing on High or Critical vulnerabilities.
+
+The workflow intentionally reports vulnerabilities even when no fix is currently available. Add narrowly scoped entries to a repository-level `.grype.yaml` only after documenting the risk acceptance and an expiry or review date.
+
+To reproduce the check locally, install Syft and Grype and run:
+
+```bash
+pnpm install --frozen-lockfile
+syft dir:. -o spdx-json=sbom.spdx.json
+grype sbom:sbom.spdx.json --fail-on high
+```
+
 ### Development
 
 ```bash
