@@ -48,31 +48,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
-        with:
-          version: 11.0.5
-
-      - name: Setup Node.js
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Generate SPDX SBOM
         uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610
         with:
           path: .
           format: spdx-json
           output-file: sbom.spdx.json
-          artifact-name: >-
-            ${{ github.event.repository.name }}-${{ github.sha }}.spdx.json
+          artifact-name: sbom.spdx.json
           upload-artifact-retention: 14
           upload-release-assets: false
 
