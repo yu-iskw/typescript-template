@@ -25,7 +25,7 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins)
 .grunt
 
 # Bower dependency directory (https://bower.io/)
@@ -41,7 +41,7 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Snowpack dependency directory (https://snowpack.dev/)
+# Snowpack dependency directory
 web_modules/
 
 # TypeScript cache
@@ -151,7 +151,3 @@ TODO.md
 # CodeQL local artifacts
 .codeql_db/
 codeql-results.sarif
-
-# Locally generated software supply-chain reports
-sbom*.spdx.json
-grype-results.*
