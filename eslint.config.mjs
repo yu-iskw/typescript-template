@@ -105,6 +105,7 @@ export default [
       '.pnpm-store/**',
       '**/dist/**',
       '**/dist-serve/**',
+      '**/coverage/**',
       '.claude/**',
       '.cursor/**',
       '.serena/**',
@@ -113,8 +114,35 @@ export default [
     ],
   },
   {
+    files: ['packages/**/*.config.ts'],
+    ignores: ['**/dist/**'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      ...importXPlugins,
+      ...securityRecommended.plugins,
+      unicorn,
+    },
+    settings: importXSettings,
+    rules: {
+      ...importXRules,
+      ...securityRecommended.rules,
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+      'no-new-func': 'error',
+      'no-unreachable': 'error',
+      'prefer-const': 'error',
+      'unicorn/filename-case': unicornFilenameCase,
+    },
+  },
+  {
     files: ['packages/**/*.ts', 'packages/**/*.tsx'],
-    ignores: ['**/dist/**', '**/*.test.ts', '**/*.test.tsx'],
+    ignores: ['**/dist/**', '**/*.config.ts', '**/*.test.ts', '**/*.test.tsx'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
@@ -172,7 +200,7 @@ export default [
   },
   {
     files: ['**/*.js'],
-    ignores: ['**/dist/**', '**/node_modules/**'],
+    ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'script',
