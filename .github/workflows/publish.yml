@@ -80,6 +80,9 @@ jobs:
       - name: Run tests
         run: |
           pnpm test
+      - name: Run security-scoped Trunk check
+        run: |
+          pnpm lint:security
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}'
