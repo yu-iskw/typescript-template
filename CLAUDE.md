@@ -31,6 +31,7 @@ Invoke with `/skill-name` when the skill is installed in this project:
 | Skill                          | Purpose                                                                     |
 | ------------------------------ | --------------------------------------------------------------------------- |
 | `build-and-fix`                | Fix build errors, type errors, compilation failures                         |
+| `check-directory-structure`    | After bulk edits; audit layout; fix flat or misplaced files                 |
 | `codeql-fix`                   | CodeQL database create/analyze and SARIF-driven fixes when CodeQL is set up |
 | `improve-claude-config`        | Evolve `.claude/` configuration                                             |
 | `initialize-project`           | Bootstrap a new repo from this template                                     |

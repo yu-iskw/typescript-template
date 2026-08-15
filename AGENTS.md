@@ -36,6 +36,7 @@ pnpm clean      # Clean build artifacts
 
 This repository is a pnpm workspace (see `pnpm-workspace.yaml`).
 
+- **pnpm 11:** pnpm-specific config (overrides, security, `allowBuilds`, etc.) lives in **`pnpm-workspace.yaml`**, not in `package.json#pnpm` (removed in pnpm 11) or in non-auth `.npmrc` files.
 - **Install:** `pnpm install`
 - **Add dependency:** current package `pnpm add <pkg>`; dev `pnpm add -D <pkg>`; workspace root `pnpm add -w <pkg>`
 - **Run scripts:** this package `pnpm <script>`; all packages `pnpm -r <script>`; one package `pnpm --filter <pkg-name> <script>`
@@ -52,7 +53,7 @@ Split so agents and CI get consistent, low-conflict feedback:
 - **Knip** (`knip.json`): unused deps, exports, workspace entrypoints. Run `pnpm knip` before large refactors or when adding packages.
 - **Trunk:** ESLint, Prettier, **Trivy**, **OSV-scanner**, etc. Use `pnpm lint:security` for security-scoped checks.
 
-**Suggested pre-commit gate:** `pnpm lint:eslint && pnpm knip && pnpm lint && pnpm test` (or `pnpm lint` alone for Trunk-only). Prefer **`pnpm format`** / `trunk fmt`; use **`pnpm format:eslint`** when you want ESLint `--fix` only.
+**Suggested pre-commit gate:** `pnpm lint:eslint && pnpm knip && pnpm lint && pnpm test` (or `pnpm lint` alone for Trunk-only). CI enforces `pnpm lint:security` via `sbom.yml` / `publish.yml`; run it locally before dependency bumps. Prefer **`pnpm format`** / `trunk fmt`; use **`pnpm format:eslint`** when you want ESLint `--fix` only.
 
 ## Code style
 
@@ -99,13 +100,14 @@ When you want durable fixes (not one-off chat advice):
 
 - **Packages:** `packages/*` (and `src/` inside a package when used)
 - **Root:** shared scripts and config
-- **CI:** `.github/workflows/`
+- **CI:** `.github/workflows/` — `sbom.yml` runs `pnpm lint:security` then generates/scans an SPDX SBOM on PRs/main; `publish.yml` re-runs `pnpm lint:security` before npm publish
 - **Agent/tooling config:** `.claude/` (Claude Code), `.cursor/` (Cursor rules), `.codex/` (Codex), `.gemini/` (Gemini CLI). Copilot can also read `.github/copilot-instructions.md` alongside `AGENTS.md`.
 - **ADRs:** significant decisions in `docs/adr` when you use ADR tooling
 
 ## Common gotchas
 
 - Always use **pnpm**, not npm or yarn
+- **Supply chain:** `minimumReleaseAge` is **7 days** (new registry versions are not installed until that age). `blockExoticSubdeps` is **on**. If install fails with ignored build scripts, run **`pnpm approve-builds`** or add the package under **`allowBuilds`** in `pnpm-workspace.yaml`.
 - Do not install Trunk-managed linters globally; versions live in `.trunk/trunk.yaml`
 - Commit **`pnpm-lock.yaml`**
 - After `pnpm install`, Trunk is under `node_modules/.bin`; pin is in `.trunk/trunk.yaml` (`cli.version`). Run `pnpm exec trunk install` if formatters/linters are missing

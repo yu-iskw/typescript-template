@@ -53,11 +53,12 @@ const importXRules = {
 
 /**
  * Shared production + test rules (AI agent feedback).
+ * Type-aware TypeScript rules catch unsafe agent-written code without custom scripts.
  * Cyclomatic: only SonarJS (core `complexity` removed — duplicated sonarjs/cyclomatic-complexity).
  * Cognitive: sonarjs/cognitive-complexity (primary “hard to change” signal).
  * Structural: max-depth / max-params / max-nested-callbacks (catch wide APIs / deep nesting).
  */
-const sharedTsRules = Object.assign({}, tseslint.configs.recommended.rules, {
+const sharedTsRules = Object.assign({}, tseslint.configs['recommended-type-checked'].rules, {
   '@typescript-eslint/no-explicit-any': 'error',
   '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   '@typescript-eslint/no-floating-promises': 'error',
@@ -66,6 +67,12 @@ const sharedTsRules = Object.assign({}, tseslint.configs.recommended.rules, {
     'error',
     { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
   ],
+  '@typescript-eslint/switch-exhaustiveness-check': 'error',
+  '@typescript-eslint/no-unnecessary-condition': 'error',
+  '@typescript-eslint/only-throw-error': 'error',
+  '@typescript-eslint/prefer-promise-reject-errors': 'error',
+  '@typescript-eslint/require-array-sort-compare': 'error',
+  '@typescript-eslint/member-ordering': 'error',
   // Security (core + plugin; Trunk still runs Trivy/OSV)
   'no-eval': 'error',
   'no-implied-eval': 'error',
@@ -95,8 +102,10 @@ export default [
   {
     ignores: [
       '**/node_modules/**',
+      '.pnpm-store/**',
       '**/dist/**',
       '**/dist-serve/**',
+      '**/coverage/**',
       '.claude/**',
       '.cursor/**',
       '.serena/**',
@@ -105,8 +114,35 @@ export default [
     ],
   },
   {
+    files: ['packages/**/*.config.ts'],
+    ignores: ['**/dist/**'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      ...importXPlugins,
+      ...securityRecommended.plugins,
+      unicorn,
+    },
+    settings: importXSettings,
+    rules: {
+      ...importXRules,
+      ...securityRecommended.rules,
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+      'no-new-func': 'error',
+      'no-unreachable': 'error',
+      'prefer-const': 'error',
+      'unicorn/filename-case': unicornFilenameCase,
+    },
+  },
+  {
     files: ['packages/**/*.ts', 'packages/**/*.tsx'],
-    ignores: ['**/dist/**', '**/*.test.ts', '**/*.test.tsx'],
+    ignores: ['**/dist/**', '**/*.config.ts', '**/*.test.ts', '**/*.test.tsx'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
@@ -164,7 +200,7 @@ export default [
   },
   {
     files: ['**/*.js'],
-    ignores: ['**/dist/**', '**/node_modules/**'],
+    ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'script',
