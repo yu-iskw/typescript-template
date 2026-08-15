@@ -53,9 +53,6 @@ permissions:
 
 jobs:
   analyze:
-    # Draft PRs are intentionally cheap. Analyze once when a PR is opened
-    # ready for review, reopened, or explicitly transitions to ready-for-review.
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
     name: Analyze
     runs-on: ubuntu-latest
 
