@@ -2,21 +2,13 @@
 
 @AGENTS.md
 
+This file is the **Claude Code compatibility entrypoint**. Cursor is the primary interactive coding-agent surface for this template; shared behavior belongs in `AGENTS.md` rather than being duplicated here.
+
 Repo-wide instructions load via **`@AGENTS.md`** above; on first use in a clone, approve **external file includes** if prompted, or check **`/memory`** and [Anthropic: importing memory files](https://docs.anthropic.com/en/docs/claude-code/claude-md#import-additional-files). Directory layout for **`.claude/`**: [`.claude/README.md`](.claude/README.md).
-
-## Parallel task execution
-
-For large tasks that benefit from concurrent work:
-
-```bash
-/parallel-executor Add comprehensive logging to all modules
-```
-
-This pattern expects matching agent definitions under `.claude/agents/` (for example `parallel-executor`, `task-worker`); add those files to enable it.
 
 ## Available agents
 
-Invoked via the Task tool (markdown definitions in `.claude/agents/`). Checked in: **`verifier`**.
+Invoked via the Agent tool (markdown definitions in `.claude/agents/`). Checked in: **`verifier`**.
 
 | Agent      | Purpose                       |
 | ---------- | ----------------------------- |
