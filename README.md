@@ -33,16 +33,16 @@ The template uses **pnpm 11** with settings in [`pnpm-workspace.yaml`](pnpm-work
 
 CI: pull requests and `main` run `pnpm lint:security` then generate/scan an SPDX SBOM (`.github/workflows/sbom.yml`). Publish re-checks `pnpm lint:security` before npm publish.
 
-### Development
-
-```bash
-pnpm dev
-```
-
 ### Build
 
 ```bash
 pnpm build
+```
+
+### Test
+
+```bash
+pnpm test
 ```
 
 ### Linting & Formatting
