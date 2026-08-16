@@ -21,7 +21,7 @@
       "Edit",
       "Glob",
       "Grep",
-      "Task"
+      "Agent"
     ],
     "deny": [
       "Bash(rm -rf /)",
