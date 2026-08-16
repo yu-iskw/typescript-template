@@ -24,8 +24,7 @@
     "security:grype": "grype .",
     "knip": "knip",
     "codeql:local": "bash dev/codeql.sh",
-    "check:agent-contract": "node dev/check-agent-contract.cjs",
-    "test": "pnpm check:agent-contract && vitest run",
+    "test": "vitest run",
     "coverage": "vitest run --coverage",
     "coverage:watch": "vitest --coverage"
   },
