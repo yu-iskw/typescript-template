@@ -1,6 +1,6 @@
 # Agent instructions (source of truth)
 
-Treat this file as the **canonical** description of how to work in this repository. Tool-specific entrypoints load or import it where supported:
+Treat this file as the **canonical** description of how to work in this repository. **Cursor is the primary interactive coding-agent surface** for this template; keep shared behavior here so other coding agents can reuse the same contract. Tool-specific entrypoints load or import it where supported:
 
 | Surface                         | How this repo uses `AGENTS.md`                                                                                                                                                                                                                                                                                 |
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -29,7 +29,6 @@ pnpm build      # Build all packages
 pnpm test       # Vitest across the workspace
 pnpm lint       # Trunk linters
 pnpm format     # Trunk formatters
-pnpm clean      # Clean build artifacts
 ```
 
 ## pnpm workspace
@@ -91,7 +90,7 @@ Coding agents should **learn from failures and surprises** and turn that into du
 
 When you want durable fixes (not one-off chat advice):
 
-1. **Classify** what to add: **rule** (guidance in **`AGENTS.md`** or **`.cursor/rules/`**), **hook** (mandatory guard in **`.claude/settings.json`**), **skill** (repeatable workflow under **`.claude/skills/`**), or **agent** (Task subagent under **`.claude/agents/`**).
+1. **Classify** what to add: **rule** (guidance in **`AGENTS.md`** or **`.cursor/rules/`**), **hook** (mandatory guard in **`.claude/settings.json`**), **skill** (repeatable workflow under **`.claude/skills/`**), or **agent** (subagent under **`.claude/agents/`**).
 2. **Prefer the narrowest shared surface:** edit **`AGENTS.md`** when every coding agent should follow the change; use **`.cursor/rules/`** for editor-scoped guidance; use **`.claude/`** when the behavior is Claude Code–specific (hooks, slash skills, subagent definitions).
 3. **Stay minimal** — only codify patterns that actually recur.
 4. In **Claude Code**, use **`/improve-claude-config`** to drive changes under **`.claude/`** (settings, hooks, skills, agents).
@@ -101,7 +100,7 @@ When you want durable fixes (not one-off chat advice):
 - **Packages:** `packages/*` (and `src/` inside a package when used)
 - **Root:** shared scripts and config
 - **CI:** `.github/workflows/` — `sbom.yml` runs `pnpm lint:security` then generates/scans an SPDX SBOM on PRs/main; `publish.yml` re-runs `pnpm lint:security` before npm publish
-- **Agent/tooling config:** `.claude/` (Claude Code), `.cursor/` (Cursor rules), `.codex/` (Codex), `.gemini/` (Gemini CLI). Copilot can also read `.github/copilot-instructions.md` alongside `AGENTS.md`.
+- **Agent/tooling config:** `.cursor/` (Cursor rules), `.claude/` (Claude Code compatibility/hooks), `.codex/` (Codex), `.gemini/` (Gemini CLI). Copilot can also read `.github/copilot-instructions.md` alongside `AGENTS.md`.
 - **ADRs:** significant decisions in `docs/adr` when you use ADR tooling
 
 ## Common gotchas
