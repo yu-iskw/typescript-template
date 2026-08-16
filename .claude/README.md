@@ -1,6 +1,6 @@
 # Claude Code Configuration
 
-This directory contains the Claude Code configuration for AI-assisted development.
+This directory contains the Claude Code compatibility configuration for AI-assisted development. **Cursor is the primary interactive coding-agent surface** for this template; shared behavior should stay in the repository root `AGENTS.md` so Cursor and other agents use the same contract.
 
 **Shared project instructions** for all coding agents live in the repository root **`AGENTS.md`**. Root **`CLAUDE.md`** imports that file with **`@AGENTS.md`** (see [Anthropic: AGENTS.md](https://docs.anthropic.com/en/docs/claude-code/claude-md#agentsmd)) and then adds **Claude-only** sections (skills, agents, hooks). The first time you open the project, Claude may ask you to **approve external file includes** so `@AGENTS.md` is expanded into context.
 
@@ -46,8 +46,7 @@ Invoke skills with slash commands:
 
 ### Using Agents
 
-Agents are specialized assistants invoked via the Task tool:
-The `verifier` agent is skill-driven and must delegate each phase to the listed skills in `.claude/agents/verifier.md`.
+Agents are specialized assistants invoked via the Agent tool. The `verifier` agent is skill-driven and must delegate each phase to the listed skills in `.claude/agents/verifier.md`.
 
 | Agent        | Purpose                        |
 | ------------ | ------------------------------ |
