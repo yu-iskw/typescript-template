@@ -8,14 +8,14 @@ The repository-local source of truth is the `ui-quality` skill at `.claude/skill
 
 Use a small layered stack rather than a large bundle of overlapping UI prompts.
 
-| Layer | Recommended capability | Role | Required by template? |
-| --- | --- | --- | --- |
-| Product/design direction | Anthropic `frontend-design` | Establish deliberate visual direction and avoid generic generated UI | No |
-| Implementation constraints | Existing project design system; shadcn/ui when already selected | Reuse proven components and interaction primitives | No |
-| Frontend engineering | Repository `ui-quality` skill + existing framework conventions | Responsive, accessible, maintainable implementation | Yes for UI work |
-| Visual feedback | Cursor Design Mode | Select/annotate rendered UI and provide precise visual feedback | No |
-| Browser verification | Cursor Playwright plugin | Exercise the real rendered application, interactions, viewports, and runtime states | Strongly recommended |
-| Deterministic gates | Existing lint/build/test/E2E/a11y/visual checks | Catch regressions independently of model judgment | Use what the derived project provides |
+| Layer                      | Recommended capability                                          | Role                                                                                | Required by template?                 |
+| -------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------- |
+| Product/design direction   | Anthropic `frontend-design`                                     | Establish deliberate visual direction and avoid generic generated UI                | No                                    |
+| Implementation constraints | Existing project design system; shadcn/ui when already selected | Reuse proven components and interaction primitives                                  | No                                    |
+| Frontend engineering       | Repository `ui-quality` skill + existing framework conventions  | Responsive, accessible, maintainable implementation                                 | Yes for UI work                       |
+| Visual feedback            | Cursor Design Mode                                              | Select/annotate rendered UI and provide precise visual feedback                     | No                                    |
+| Browser verification       | Cursor Playwright plugin                                        | Exercise the real rendered application, interactions, viewports, and runtime states | Strongly recommended                  |
+| Deterministic gates        | Existing lint/build/test/E2E/a11y/visual checks                 | Catch regressions independently of model judgment                                   | Use what the derived project provides |
 
 ## Cursor setup
 
