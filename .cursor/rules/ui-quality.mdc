@@ -1,0 +1,22 @@
+---
+description: Production UI/UX guidance for frontend pages, components, styling, responsive behavior, accessibility, and visual verification.
+globs: "**/*.{tsx,jsx,html,css,scss,sass,less}"
+alwaysApply: false
+---
+
+# UI quality
+
+When working on user-facing UI:
+
+- Follow the repository-local `ui-quality` workflow in `.claude/skills/ui-quality/SKILL.md`; `.agents/skills` exposes the same skills to compatible agents.
+- Preserve the existing framework, design system, tokens, and component conventions. Do not introduce React, shadcn/ui, Tailwind, or another UI stack merely because it is familiar.
+- Prefer existing components first. If the project already uses shadcn/ui and the shadcn Cursor plugin is available, use the plugin instead of recreating components manually.
+- Design every changed interaction across relevant loading, empty, error, success, disabled, focus, and responsive states.
+- Use semantic HTML, keyboard-operable controls, visible focus, explicit labels, and non-color-only status/error communication.
+- Keep hierarchy, spacing, typography, density, and action prominence deliberate. Avoid generic AI-UI defaults such as unnecessary gradients, excessive nested cards, decorative pills, and gratuitous motion.
+- Verify the rendered application whenever browser tooling is available. Prefer the verified Cursor Playwright plugin or equivalent project browser tooling for navigation, interactions, responsive checks, screenshots/snapshots, and runtime-error inspection.
+- Use Cursor Design Mode when visual selection/annotation is more precise than describing the target element in prose.
+- Never claim visual correctness without rendered inspection; explicitly report when browser/visual verification was not possible.
+- Run the existing repository/package quality gates after implementation; do not add heavyweight UI tooling solely to satisfy this rule.
+
+See `docs/ui-agent-workflow.md` for optional plugin setup and the recommended closed-loop workflow.

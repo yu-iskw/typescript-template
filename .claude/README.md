@@ -9,7 +9,7 @@ This directory contains the Claude Code compatibility configuration for AI-assis
 ```text
 .claude/
 ├── README.md              # This file
-├── settings.json          # Hooks, permissions, and environment
+├── settings.json          # Project plugins, hooks, permissions, and environment
 ├── agents/                # Specialized subagents (Cursor-compatible markdown)
 │   └── verifier.md
 ├── skills/                # Reusable workflows (slash commands)
@@ -25,7 +25,8 @@ This directory contains the Claude Code compatibility configuration for AI-assis
 │   ├── security-scan/
 │   ├── security-vulnerability-audit/
 │   ├── setup-dev-env/
-│   └── test-and-fix/
+│   ├── test-and-fix/
+│   └── ui-quality/
 └── hooks/
     ├── block-dangerous.sh
     ├── format-ts.sh
@@ -42,7 +43,10 @@ Invoke skills with slash commands:
 /setup-dev-env
 /lint-and-fix
 /test-and-fix
+/ui-quality
 ```
+
+The `ui-quality` skill is framework-neutral and should only be used when a derived project actually has a relevant frontend surface. It coordinates design intent, component reuse, accessibility/responsiveness, rendered browser verification, and evidence-based handoff. Optional Cursor/Claude design and browser plugins are documented in [`docs/ui-agent-workflow.md`](../docs/ui-agent-workflow.md).
 
 ### Using Agents
 
@@ -66,8 +70,11 @@ This configuration supports self-evolution. Use `/improve-claude-config` when:
 
 Contains:
 
+- **enabledPlugins**: Shared project plugins. The UI baseline enables Anthropic `frontend-design` and Microsoft Playwright from `claude-plugins-official`.
 - **permissions**: Allowed and denied commands
 - **hooks**: Automatic triggers for tool events
+
+Use project-scoped `enabledPlugins` for capabilities that should follow the repository. Use `.claude/settings.local.json` for per-machine opt-outs or experiments instead of modifying shared settings.
 
 ### AGENTS.md (repository root)
 
@@ -83,6 +90,8 @@ Composes **`@AGENTS.md`** plus Claude-specific tables (skills, agents, self-impr
 2. **Keep the Claude-only tail of `CLAUDE.md` small**; move long procedural detail into `.claude/skills/`.
 3. **Test hooks** before committing changes to `.claude/hooks/`.
 4. **Version control** `.claude/` and root instruction files together with clear commit messages.
+5. **Keep third-party skills/plugins opt-in and reviewed**; do not make mutable remote instructions a hidden dependency of the template.
+6. **Avoid duplicate imported plugins/MCP servers in Cursor** when Cursor's third-party configuration import is enabled.
 
 ## Customization
 

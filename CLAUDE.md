@@ -35,6 +35,20 @@ Invoke with `/skill-name` when the skill is installed in this project:
 | `security-vulnerability-audit` | Structured Trunk security audit (Trivy, OSV-scanner) and reporting          |
 | `setup-dev-env`                | Node, pnpm, Trunk setup                                                     |
 | `test-and-fix`                 | Fix failing tests                                                           |
+| `ui-quality`                   | Closed-loop production UI/UX design, implementation, and browser review     |
+
+## Project plugins
+
+Project-scoped Claude Code plugins are declared in `.claude/settings.json` so the shared repository configuration, rather than a developer's global setup, determines the baseline capabilities:
+
+- `frontend-design@claude-plugins-official` — Anthropic's frontend design skill for high-quality UI/UX implementation.
+- `playwright@claude-plugins-official` — Microsoft's Playwright MCP integration for rendered browser inspection and interaction testing.
+
+Claude Code may prompt for trust/installation on first use. A developer can opt out locally with `.claude/settings.local.json` without changing the shared project settings.
+
+Cursor can import Claude Code plugins when **Include third-party Plugins, Skills, and other configs** is enabled. Treat that as a compatibility path rather than assuming every Claude plugin component has native Cursor parity. If Cursor imports the Claude Playwright plugin, do not also enable a second Playwright MCP/plugin instance for the same project.
+
+The repository-local `ui-quality` skill remains the workflow and verification contract regardless of which editor/plugin surface supplies the design or browser capability. See [`docs/ui-agent-workflow.md`](docs/ui-agent-workflow.md).
 
 ## Instruction maintenance
 
