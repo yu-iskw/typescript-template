@@ -35,6 +35,9 @@ Invoke with `/skill-name` when the skill is installed in this project:
 | `security-vulnerability-audit` | Structured Trunk security audit (Trivy, OSV-scanner) and reporting          |
 | `setup-dev-env`                | Node, pnpm, Trunk setup                                                     |
 | `test-and-fix`                 | Fix failing tests                                                           |
+| `ui-quality`                   | Closed-loop production UI/UX design, implementation, and browser review    |
+
+For design-heavy frontend work, Anthropic's official `frontend-design` plugin is an optional aesthetic capability; the repository-local `ui-quality` skill remains the workflow and verification contract. See [`docs/ui-agent-workflow.md`](docs/ui-agent-workflow.md).
 
 ## Instruction maintenance
 
