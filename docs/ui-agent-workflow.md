@@ -1,25 +1,33 @@
 # UI agent workflow
 
-This template keeps UI tooling **opt-in** because it is also used for backend, CLI, library, and infrastructure-oriented TypeScript projects. The goal is to give coding agents a commercial-grade UI workflow without forcing a frontend framework or design system into every repository created from the template.
+This template keeps frontend runtime choices **opt-in** because it is also used for backend, CLI, library, and infrastructure-oriented TypeScript projects. The goal is to give coding agents a commercial-grade UI workflow without forcing a frontend framework or design system into every repository created from the template.
 
-The repository-local source of truth is the `ui-quality` skill at `.claude/skills/ui-quality/SKILL.md`. Compatible agents can also discover it through `.agents/skills`.
+The repository-local source of truth is the `ui-quality` skill at `.claude/skills/ui-quality/SKILL.md`. Compatible agents can also discover it through `.agents/skills`. Claude Code project settings additionally enable the `frontend-design` and `playwright` plugins from `claude-plugins-official`; these are agent capabilities, not application dependencies.
 
 ## Recommended capability stack
 
 Use a small layered stack rather than a large bundle of overlapping UI prompts.
 
-| Layer                      | Recommended capability                                          | Role                                                                                | Required by template?                 |
-| -------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------- |
-| Product/design direction   | Anthropic `frontend-design`                                     | Establish deliberate visual direction and avoid generic generated UI                | No                                    |
-| Implementation constraints | Existing project design system; shadcn/ui when already selected | Reuse proven components and interaction primitives                                  | No                                    |
-| Frontend engineering       | Repository `ui-quality` skill + existing framework conventions  | Responsive, accessible, maintainable implementation                                 | Yes for UI work                       |
-| Visual feedback            | Cursor Design Mode                                              | Select/annotate rendered UI and provide precise visual feedback                     | No                                    |
-| Browser verification       | Cursor Playwright plugin                                        | Exercise the real rendered application, interactions, viewports, and runtime states | Strongly recommended                  |
-| Deterministic gates        | Existing lint/build/test/E2E/a11y/visual checks                 | Catch regressions independently of model judgment                                   | Use what the derived project provides |
+| Layer                      | Recommended capability                                               | Role                                                                                | Required by template?                 |
+| -------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------- |
+| Product/design direction   | Anthropic `frontend-design`                                          | Establish deliberate visual direction and avoid generic generated UI                | Project-enabled for Claude Code       |
+| Implementation constraints | Existing project design system; shadcn/ui when already selected      | Reuse proven components and interaction primitives                                  | No                                    |
+| Frontend engineering       | Repository `ui-quality` skill + existing framework conventions       | Responsive, accessible, maintainable implementation                                 | Yes for UI work                       |
+| Visual feedback            | Cursor Design Mode                                                   | Select/annotate rendered UI and provide precise visual feedback                     | No                                    |
+| Browser verification       | Playwright plugin through Claude Code or Cursor                       | Exercise the real rendered application, interactions, viewports, and runtime states | Project-enabled for Claude Code       |
+| Deterministic gates        | Existing lint/build/test/E2E/a11y/visual checks                      | Catch regressions independently of model judgment                                   | Use what the derived project provides |
 
 ## Cursor setup
 
 Cursor is the primary interactive coding-agent surface for this template.
+
+### Claude Code plugin import
+
+Cursor can import agent configuration from other tools. When **Include third-party Plugins, Skills, and other configs** is enabled in Cursor, the project-level Claude Code plugins declared in `.claude/settings.json` can be available to Cursor as imported plugins.
+
+This provides a convenient shared path for `frontend-design` and Playwright, but do not assume complete behavioral parity for every Claude plugin component. Prefer Cursor-native configuration when an imported component does not work correctly.
+
+Avoid duplicate MCP/plugin instances. If Cursor has already imported the Claude Code Playwright plugin, do not also enable another Playwright plugin for the same project.
 
 ### shadcn/ui
 
@@ -33,9 +41,9 @@ Do **not** add shadcn/ui to a project merely to use the plugin. Existing compone
 
 Marketplace: <https://cursor.com/marketplace/shadcn>
 
-### Playwright
+### Playwright fallback
 
-Install Cursor's verified Playwright plugin when you want the agent to inspect and exercise the rendered web application:
+If Cursor is not importing the Claude Code Playwright plugin, install Cursor's verified Playwright plugin when you want the agent to inspect and exercise the rendered web application:
 
 ```text
 /add-plugin playwright
@@ -51,15 +59,30 @@ Use Cursor Design Mode for iterative visual review when selecting or annotating 
 
 ## Claude Code setup
 
-For design-heavy frontend work, install Anthropic's official `frontend-design` plugin through Claude Code's plugin UI/commands when available:
+The repository declares shared project plugins in `.claude/settings.json`:
 
-```text
-/plugin install frontend-design@claude-plugins-official
+```json
+{
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true
+  }
+}
 ```
 
-Official plugin source: <https://github.com/anthropics/claude-plugins-official/tree/main/plugins/frontend-design>
+Claude Code may prompt to trust/install the project-declared plugins on first use. No user-global plugin installation is required for the baseline.
 
-The plugin is an aesthetic/design capability. Continue to follow `AGENTS.md`, the local `ui-quality` skill, the existing component architecture, and repository quality gates.
+- `frontend-design` is the aesthetic/design capability.
+- `playwright` supplies Microsoft's browser automation MCP server for rendered verification.
+
+A developer who does not need one of these capabilities in a derived project can disable it in `.claude/settings.local.json` without changing the shared repository settings.
+
+Official sources:
+
+- <https://github.com/anthropics/claude-plugins-official/tree/main/plugins/frontend-design>
+- <https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/playwright>
+
+The plugins do not replace `AGENTS.md`, the local `ui-quality` workflow, the existing component architecture, or repository quality gates.
 
 ## Optional community skills
 
