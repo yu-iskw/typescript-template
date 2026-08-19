@@ -9,7 +9,7 @@ This directory contains the Claude Code compatibility configuration for AI-assis
 ```text
 .claude/
 ├── README.md              # This file
-├── settings.json          # Hooks, permissions, and environment
+├── settings.json          # Project plugins, hooks, permissions, and environment
 ├── agents/                # Specialized subagents (Cursor-compatible markdown)
 │   └── verifier.md
 ├── skills/                # Reusable workflows (slash commands)
@@ -70,8 +70,11 @@ This configuration supports self-evolution. Use `/improve-claude-config` when:
 
 Contains:
 
+- **enabledPlugins**: Shared project plugins. The UI baseline enables Anthropic `frontend-design` and Microsoft Playwright from `claude-plugins-official`.
 - **permissions**: Allowed and denied commands
 - **hooks**: Automatic triggers for tool events
+
+Use project-scoped `enabledPlugins` for capabilities that should follow the repository. Use `.claude/settings.local.json` for per-machine opt-outs or experiments instead of modifying shared settings.
 
 ### AGENTS.md (repository root)
 
@@ -88,6 +91,7 @@ Composes **`@AGENTS.md`** plus Claude-specific tables (skills, agents, self-impr
 3. **Test hooks** before committing changes to `.claude/hooks/`.
 4. **Version control** `.claude/` and root instruction files together with clear commit messages.
 5. **Keep third-party skills/plugins opt-in and reviewed**; do not make mutable remote instructions a hidden dependency of the template.
+6. **Avoid duplicate imported plugins/MCP servers in Cursor** when Cursor's third-party configuration import is enabled.
 
 ## Customization
 
