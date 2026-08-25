@@ -24,8 +24,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
+permissions: read-all
 
 jobs:
   build:
@@ -35,8 +34,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
-          persist-credentials: true
-          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: false
 
       - name: Enable Corepack
         run: corepack enable
@@ -59,20 +57,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Format ESLint config
-        run: pnpm exec prettier --write eslint.config.mjs
-
-      - name: Commit formatting
-        run: |
-          if git diff --quiet -- eslint.config.mjs; then
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add eslint.config.mjs
-          git commit -m "style: format ESLint configuration"
-          git push
 
       - name: Find unused code (Knip)
         run: pnpm knip
