@@ -1,10 +1,16 @@
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 import { flatConfigs as importXFlatConfigs } from 'eslint-plugin-import-x';
+import {
+  projectStructureParser,
+  projectStructurePlugin,
+} from 'eslint-plugin-project-structure';
 import sonarjs from 'eslint-plugin-sonarjs';
 import security from 'eslint-plugin-security';
 import unicorn from 'eslint-plugin-unicorn';
 import vitestPlugin from '@vitest/eslint-plugin';
+
+import { folderStructureConfig } from './folder-structure.mjs';
 
 /** @type {import("@typescript-eslint/parser").ParserOptions} */
 const tsParserOptions = {
@@ -14,13 +20,8 @@ const tsParserOptions = {
   tsconfigRootDir: import.meta.dirname,
 };
 
-/** Flat-config fragment from eslint-plugin-security (code-level patterns; complements Trivy/OSV). */
 const securityRecommended = security.configs.recommended;
 
-/**
- * import-x recommended + typescript resolver (uses `projectService` from parser; eslint-import-resolver-typescript installed for resolution).
- * Prettier stays canonical via Trunk — no @stylistic rules here.
- */
 const importXPlugins = {
   ...importXFlatConfigs.recommended.plugins,
   ...importXFlatConfigs.typescript.plugins,
@@ -51,13 +52,6 @@ const importXRules = {
   'import-x/no-cycle': ['error', { maxDepth: 3 }],
 };
 
-/**
- * Shared production + test rules (AI agent feedback).
- * Type-aware TypeScript rules catch unsafe agent-written code without custom scripts.
- * Cyclomatic: only SonarJS (core `complexity` removed — duplicated sonarjs/cyclomatic-complexity).
- * Cognitive: sonarjs/cognitive-complexity (primary “hard to change” signal).
- * Structural: max-depth / max-params / max-nested-callbacks (catch wide APIs / deep nesting).
- */
 const sharedTsRules = Object.assign({}, tseslint.configs['recommended-type-checked'].rules, {
   '@typescript-eslint/no-explicit-any': 'error',
   '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
@@ -73,7 +67,6 @@ const sharedTsRules = Object.assign({}, tseslint.configs['recommended-type-check
   '@typescript-eslint/prefer-promise-reject-errors': 'error',
   '@typescript-eslint/require-array-sort-compare': 'error',
   '@typescript-eslint/member-ordering': 'error',
-  // Security (core + plugin; Trunk still runs Trivy/OSV)
   'no-eval': 'error',
   'no-implied-eval': 'error',
   'no-new-func': 'error',
@@ -82,7 +75,6 @@ const sharedTsRules = Object.assign({}, tseslint.configs['recommended-type-check
   'max-depth': ['error', { max: 6 }],
   'max-params': ['error', { max: 8 }],
   'max-nested-callbacks': ['error', { max: 4 }],
-  // SonarJS
   'sonarjs/cyclomatic-complexity': ['error', { threshold: 20 }],
   'sonarjs/cognitive-complexity': ['error', 20],
   'sonarjs/no-duplicate-string': 'error',
@@ -114,20 +106,22 @@ export default [
     ],
   },
   {
+    files: ['**'],
+    ignores: ['projectStructure.cache.json'],
+    languageOptions: { parser: projectStructureParser },
+    plugins: { 'project-structure': projectStructurePlugin },
+    rules: {
+      'project-structure/folder-structure': ['error', folderStructureConfig],
+    },
+  },
+  {
     files: ['packages/**/*.config.ts'],
     ignores: ['**/dist/**'],
     languageOptions: {
       parser: tsparser,
-      parserOptions: {
-        ecmaVersion: 2022,
-        sourceType: 'module',
-      },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
-    plugins: {
-      ...importXPlugins,
-      ...securityRecommended.plugins,
-      unicorn,
-    },
+    plugins: { ...importXPlugins, ...securityRecommended.plugins, unicorn },
     settings: importXSettings,
     rules: {
       ...importXRules,
@@ -145,10 +139,7 @@ export default [
     ignores: ['**/dist/**', '**/*.config.ts', '**/*.test.ts', '**/*.test.tsx'],
     languageOptions: {
       parser: tsparser,
-      parserOptions: {
-        ...tsParserOptions,
-        ecmaFeatures: { jsx: true },
-      },
+      parserOptions: { ...tsParserOptions, ecmaFeatures: { jsx: true } },
     },
     plugins: {
       ...importXPlugins,
@@ -171,10 +162,7 @@ export default [
     ignores: ['**/dist/**'],
     languageOptions: {
       parser: tsparser,
-      parserOptions: {
-        ...tsParserOptions,
-        ecmaFeatures: { jsx: true },
-      },
+      parserOptions: { ...tsParserOptions, ecmaFeatures: { jsx: true } },
       globals: vitestPlugin.environments.env.globals,
     },
     plugins: {
@@ -191,7 +179,6 @@ export default [
       ...securityRecommended.rules,
       ...sharedTsRules,
       ...vitestPlugin.configs.recommended.rules,
-      // Tests often repeat string literals and use conditional expects; keep signal without noise.
       'vitest/no-conditional-expect': 'off',
       'sonarjs/no-duplicate-string': 'off',
       'max-lines-per-function': ['error', { max: 700 }],
@@ -215,9 +202,7 @@ export default [
         exports: 'readonly',
       },
     },
-    plugins: {
-      ...securityRecommended.plugins,
-    },
+    plugins: { ...securityRecommended.plugins },
     rules: {
       ...securityRecommended.rules,
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
