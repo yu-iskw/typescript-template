@@ -1,10 +1,7 @@
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 import { flatConfigs as importXFlatConfigs } from 'eslint-plugin-import-x';
-import {
-  projectStructureParser,
-  projectStructurePlugin,
-} from 'eslint-plugin-project-structure';
+import { projectStructureParser, projectStructurePlugin } from 'eslint-plugin-project-structure';
 import sonarjs from 'eslint-plugin-sonarjs';
 import security from 'eslint-plugin-security';
 import unicorn from 'eslint-plugin-unicorn';
