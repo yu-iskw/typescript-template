@@ -103,6 +103,12 @@ When you want durable fixes (not one-off chat advice):
 - **Agent/tooling config:** `.cursor/` (Cursor rules), `.claude/` (Claude Code compatibility/hooks), `.codex/` (Codex), `.gemini/` (Gemini CLI). Copilot can also read `.github/copilot-instructions.md` alongside `AGENTS.md`.
 - **ADRs:** significant decisions in `docs/adr` when you use ADR tooling
 
+### ADR contract (steerable memory)
+
+- Binding set = Status **Accepted** only. Start from `adr list` / `docs/adr/README.md`; do not load the whole tree or paste ADR bodies into this file.
+- If a better approach appears, stop implementing the old decision; use `manage-adr` **Challenge** (Proposed ADR). Do not rewrite an Accepted Decision in place. Do not use `adr new -s` until **Accept**.
+- Leave proposals **Proposed** for a human (draft PR). Use `manage-adr` Accept / Reject only when the user explicitly decides.
+
 ## Common gotchas
 
 - Always use **pnpm**, not npm or yarn
