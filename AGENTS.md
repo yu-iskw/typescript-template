@@ -68,6 +68,22 @@ Split so agents and CI get consistent, low-conflict feedback:
 - Aim for strong coverage on core logic
 - Run `pnpm test` before committing
 
+## Frontend and UI work
+
+This template is framework-neutral. Do **not** add React, shadcn/ui, Tailwind, Playwright, or another frontend stack just because UI-oriented agent tooling exists.
+
+When a task changes user-facing web UI:
+
+- Follow the repository-local **`ui-quality`** skill at `.claude/skills/ui-quality/SKILL.md` (also exposed through `.agents/skills` for compatible agents).
+- Cursor auto-attaches `.cursor/rules/ui-quality.mdc` to common frontend file types.
+- Preserve the existing framework, design system, component library, tokens, and visual language before introducing new primitives.
+- Treat design direction, implementation, accessibility/responsiveness, product states, and rendered verification as separate quality concerns.
+- Prefer real browser inspection after material UI changes. If Cursor's Playwright plugin, browser tooling, or an equivalent is available, exercise the running application instead of inferring visual correctness from source code.
+- Never claim that UI "looks correct" when rendered inspection was not performed; report visual verification as outstanding.
+- Keep third-party design skills/plugins optional and explicitly reviewed. Do not vendor or execute mutable remote skill instructions without reviewing provenance, license, scripts/hooks, and update behavior.
+
+See [`docs/ui-agent-workflow.md`](docs/ui-agent-workflow.md) for the recommended Cursor/Claude capability stack and closed-loop workflow.
+
 ## Git workflow
 
 - Branch from `main`
