@@ -15,9 +15,16 @@ allowBuilds:
 
 # Migrated from package.json#pnpm (pnpm 11 no longer reads that field)
 # Allow urgent patched versions blocked by the 7-day quarantine.
+# Allow urgent patched versions blocked by the 7-day quarantine.
 minimumReleaseAgeExclude:
   - brace-expansion@5.0.9
   - nanoid@3.3.18
+  # SBOM / osv-scanner fixes (published within 7d quarantine window)
+  - vitest
+  - '@vitest/coverage-v8'
+  - '@vitest/mocker'
+  - browserslist
+  - baseline-browser-mapping
 
 overrides:
   # GHSA-r292-9mhp-454m fixed in 7.5.21+
@@ -26,3 +33,11 @@ overrides:
   brace-expansion: 5.0.9
   # GHSA-2v37-7h3g-55p8 fixed in the 3.x line in 3.3.18+
   nanoid: 3.3.18
+  # GHSA-73wf-gq98-2v4g / GHSA-c83g-rgw3-j3cx fixed in 4.28.7+
+  browserslist: 4.28.9
+  # GHSA-w5vr-8v7q-w6rv fixed in 2.11.0+
+  baseline-browser-mapping: 2.11.0
+  # GHSA-7w5x-hrqm-74c2 fixed in 1.7.1+
+  smol-toml: 1.8.0
+  # GHSA-p498-v437-472g fixed in 0.16.8+
+  '@humanfs/node': 0.16.8
