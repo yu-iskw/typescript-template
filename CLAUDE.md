@@ -28,7 +28,7 @@ Invoke with `/skill-name` when the skill is installed in this project:
 | `improve-claude-config`        | Evolve `.claude/` configuration                                             |
 | `initialize-project`           | Bootstrap a new repo from this template                                     |
 | `lint-and-fix`                 | Fix lint/format issues via Trunk                                            |
-| `manage-adr`                   | ADRs in `docs/adr`                                                          |
+| `manage-adr`                   | ADRs in `docs/adr`: follow / challenge / accept                             |
 | `node-upgrade`                 | Upgrade Node dependencies in pnpm workspaces                                |
 | `postmortem`                   | End-of-session capture to improve rules, hooks, skills (see `AGENTS.md`)    |
 | `security-scan`                | `pnpm lint:security` and `pnpm security:grype`                              |
