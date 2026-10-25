@@ -16,6 +16,7 @@ This directory contains the Claude Code compatibility configuration for AI-assis
 │   ├── build-and-fix/
 │   ├── check-directory-structure/
 │   ├── codeql-fix/
+│   ├── design-ui/
 │   ├── improve-claude-config/
 │   ├── initialize-project/
 │   ├── lint-and-fix/
